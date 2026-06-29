@@ -1,26 +1,186 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #060507;
+  --fg: #f4f1ea;
+  --muted: #8d8676;
+  --accent: #e8a23d; /* honey / amber */
+  --accent-soft: rgba(232, 162, 61, 0.16);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ---- Holding page ---- */
+.stage {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* warm radial glow */
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -2;
+  background:
+    radial-gradient(60% 50% at 50% 18%, var(--accent-soft), transparent 70%),
+    radial-gradient(80% 60% at 50% 120%, rgba(232, 162, 61, 0.08), transparent 70%);
+}
+
+/* fine film grain so the dark field never looks flat / cheap */
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+  animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.62rem, 1.4vw, 0.74rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 14px 2px var(--accent);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+.wordmark {
+  margin: 1.4rem 0 0;
+  font-weight: 600;
+  font-size: clamp(4rem, 22vw, 13rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #fffdf8 0%, #e9e2d2 45%, #9a907c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* slow sheen sweeping across the wordmark */
+.wordmark-sheen {
+  position: relative;
+}
+.wordmark-sheen::after {
+  content: "RATEL";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    rgba(255, 246, 224, 0.85) 50%,
+    transparent 65%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 250% 100%;
+  animation: sheen 6s ease-in-out infinite;
+}
+
+.rule {
+  width: clamp(60px, 14vw, 120px);
+  height: 1px;
+  margin: 2.2rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.tagline {
+  margin: 1.6rem auto 0;
+  max-width: 32ch;
+  font-size: clamp(0.95rem, 2.3vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.foot {
+  position: absolute;
+  bottom: clamp(1.2rem, 4vh, 2.4rem);
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 70%, transparent);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes sheen {
+  0%,
+  18% {
+    background-position: 250% 0;
+  }
+  60%,
+  100% {
+    background-position: -90% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap,
+  .eyebrow::before,
+  .wordmark-sheen::after {
+    animation: none;
+  }
 }
