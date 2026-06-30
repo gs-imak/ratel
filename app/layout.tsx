@@ -1,39 +1,58 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Oswald, Public_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/lib/store";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const oswald = Oswald({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-oswald",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const publicSans = Public_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-public-sans",
+});
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-source-serif",
 });
 
 export const metadata: Metadata = {
-  title: "Ratel",
-  description: "Ratel — coming soon.",
+  title: "Ratel — Prévention & Sécurité anti-incendie",
+  description:
+    "Extincteurs certifiés NF/CE livrés vite et bien, et une alerte géolocalisée qui prévient les secours en un seul geste. La vie n'a pas de prix.",
   metadataBase: new URL("https://ratel-self.vercel.app"),
   openGraph: {
-    title: "Ratel",
-    description: "Ratel — coming soon.",
+    title: "Ratel — Prévention & Sécurité anti-incendie",
+    description:
+      "Extincteurs certifiés et alerte géolocalisée. Protégez votre foyer, votre véhicule, votre entreprise.",
     type: "website",
+    locale: "fr_FR",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="fr"
+      className={`${oswald.variable} ${publicSans.variable} ${sourceSerif.variable}`}
     >
-      <body className="min-h-full">{children}</body>
+      <body
+        className="theme-caserne"
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
+        <Providers>
+          <Header />
+          <div style={{ flex: 1 }}>{children}</div>
+          <Footer />
+        </Providers>
+      </body>
     </html>
   );
 }
