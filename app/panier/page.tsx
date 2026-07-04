@@ -9,7 +9,7 @@ export default function PanierPage() {
 
   return (
     <main style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 80px" }}>
-      <h1 className="display" style={{ fontSize: "clamp(32px,4vw,48px)", color: "var(--ink)", marginBottom: 28 }}>
+      <h1 className="display on-bg" style={{ fontSize: "clamp(32px,4vw,48px)", color: "var(--ink)", marginBottom: 28 }}>
         Votre panier
       </h1>
 
@@ -18,6 +18,7 @@ export default function PanierPage() {
           style={{
             textAlign: "center",
             padding: "70px 20px",
+            background: "var(--surface)",
             border: "1px dashed var(--line)",
             borderRadius: "var(--radius)",
           }}

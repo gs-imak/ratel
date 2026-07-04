@@ -31,9 +31,17 @@
   margin: 0;
   padding: 0;
 }
-html,
+html {
+  background: #c11620;
+}
 body {
-  background: var(--bg);
+  /* red + yellow background (client request) — red field with a large gold
+     glow so both colours read clearly while text stays legible */
+  background:
+    radial-gradient(120% 95% at 88% 6%, rgba(245, 179, 1, 0.85), rgba(245, 179, 1, 0) 52%),
+    radial-gradient(90% 70% at 6% 100%, rgba(245, 160, 10, 0.5), rgba(245, 160, 10, 0) 55%),
+    linear-gradient(158deg, #e0242c 0%, #c81620 52%, #a51018 100%);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-public-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,6 +63,18 @@ a {
   font-weight: var(--display-weight);
   text-transform: var(--display-transform);
   letter-spacing: var(--display-spacing);
+}
+
+/* Text sitting directly on the red/yellow page background → force light for
+   contrast (overrides the inline var(--ink)/var(--muted) colours). */
+.on-bg {
+  color: #ffffff !important;
+}
+.on-bg-soft {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+.on-bg-gold {
+  color: var(--hi) !important;
 }
 
 /* ---- Buttons ---- */

@@ -11,10 +11,10 @@ export default function BoutiquePage() {
   return (
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 80px" }}>
       <div style={{ marginBottom: 30 }}>
-        <h1 className="display" style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 10 }}>
+        <h1 className="display on-bg" style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 10 }}>
           Boutique
         </h1>
-        <p style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em" }}>
+        <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em" }}>
           Extincteurs et équipements certifiés NF/CE, sélectionnés pour leur fiabilité. Le bon appareil dépend du
           risque — filtrez par usage.
         </p>

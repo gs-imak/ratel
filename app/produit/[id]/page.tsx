@@ -21,6 +21,7 @@ export default function ProductPage() {
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px 80px" }}>
       <Link
         href="/boutique"
+        className="on-bg-soft"
         style={{ color: "var(--muted)", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 24 }}
       >
         ← Retour à la boutique
@@ -63,12 +64,14 @@ export default function ProductPage() {
             {sel.tag}
           </span>
           <h1
-            className="display"
+            className="display on-bg"
             style={{ fontSize: "clamp(30px,3.6vw,44px)", color: "var(--ink)", lineHeight: 1.05, marginBottom: 14 }}
           >
             {sel.name}
           </h1>
-          <p style={{ fontSize: 16, lineHeight: 1.65, color: "var(--muted)", marginBottom: 24 }}>{sel.blurb}</p>
+          <p className="on-bg-soft" style={{ fontSize: 16, lineHeight: 1.65, color: "var(--muted)", marginBottom: 24 }}>
+            {sel.blurb}
+          </p>
 
           <div
             style={{
@@ -123,7 +126,7 @@ export default function ProductPage() {
               Ajouter au panier
             </button>
           </div>
-          <div style={{ display: "flex", gap: 22, marginTop: 18, flexWrap: "wrap", fontSize: 13.5, color: "var(--muted)" }}>
+          <div className="on-bg-soft" style={{ display: "flex", gap: 22, marginTop: 18, flexWrap: "wrap", fontSize: 13.5, color: "var(--muted)" }}>
             <span>🚚 Livraison 24-48h</span>
             <span>🛡️ Garantie 6 mois</span>
             <span>↩ Retour 30 jours</span>

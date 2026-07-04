@@ -6,6 +6,7 @@ export default function SecteursPage() {
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 80px" }}>
       <div style={{ maxWidth: "46em", marginBottom: 36 }}>
         <div
+          className="on-bg-gold"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -18,13 +19,13 @@ export default function SecteursPage() {
             marginBottom: 14,
           }}
         >
-          <span style={{ width: 26, height: 2, background: "var(--accent)", display: "inline-block" }} />
+          <span style={{ width: 26, height: 2, background: "var(--hi)", display: "inline-block" }} />
           Solutions par secteur
         </div>
-        <h1 className="display" style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 12 }}>
+        <h1 className="display on-bg" style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 12 }}>
           Chaque secteur, son risque
         </h1>
-        <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6 }}>
+        <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6 }}>
           De l’aéroport à la salle de classe, chaque établissement a ses obligations et ses risques propres. Nous
           équipons et accompagnons chaque type de site — demandez un devis adapté à votre activité.
         </p>

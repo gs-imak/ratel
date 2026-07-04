@@ -40,10 +40,10 @@ export default function SignalerPage() {
           Réservé aux abonnés
         </span>
       </div>
-      <h1 className="display" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 10 }}>
+      <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 10 }}>
         Signaler un incendie
       </h1>
-      <p style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 30 }}>
+      <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 30 }}>
         En cas d’urgence réelle, déclenchez l’alerte. Votre position GPS sera transmise aux secours (18 · 112) et à vos
         contacts de confiance.
       </p>

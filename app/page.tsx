@@ -206,6 +206,7 @@ export default function HomePage() {
         >
           <div>
             <div
+              className="on-bg-gold"
               style={{
                 fontSize: 12,
                 letterSpacing: "0.16em",
@@ -217,11 +218,11 @@ export default function HomePage() {
             >
               Animation — savoir réagir
             </div>
-            <h2 className="display" style={{ fontSize: "clamp(30px,4vw,46px)", lineHeight: 1, color: "var(--ink)" }}>
+            <h2 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", lineHeight: 1, color: "var(--ink)" }}>
               La méthode en 4 gestes
             </h2>
           </div>
-          <p style={{ maxWidth: "24em", fontSize: 15, color: "var(--muted)", lineHeight: 1.6 }}>
+          <p className="on-bg-soft" style={{ maxWidth: "24em", fontSize: 15, color: "var(--muted)", lineHeight: 1.6 }}>
             Face à un départ de feu, chaque seconde compte. Regardez la démonstration, puis retenez les quatre gestes
             de la méthode P.A.S.S.
           </p>
@@ -320,10 +321,10 @@ export default function HomePage() {
             gap: 16,
           }}
         >
-          <h2 className="display" style={{ fontSize: "clamp(28px,3.4vw,40px)", color: "var(--ink)" }}>
+          <h2 className="display on-bg" style={{ fontSize: "clamp(28px,3.4vw,40px)", color: "var(--ink)" }}>
             Les plus choisis
           </h2>
-          <Link href="/boutique" className="link-blue" style={{ fontSize: 15 }}>
+          <Link href="/boutique" className="link-blue on-bg" style={{ fontSize: 15 }}>
             Voir toute la boutique →
           </Link>
         </div>

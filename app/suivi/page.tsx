@@ -15,18 +15,18 @@ export default function SuiviPage() {
         }}
       >
         <div>
-          <h1 className="display" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", lineHeight: 1 }}>
+          <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", lineHeight: 1 }}>
             Suivi de livraison
           </h1>
-          <p style={{ fontSize: 15, color: "var(--muted)", marginTop: 8 }}>
-            Commande <strong style={{ color: "var(--ink)" }}>#RTL-2048</strong> · livreur en route
+          <p className="on-bg-soft" style={{ fontSize: 15, color: "var(--muted)", marginTop: 8 }}>
+            Commande <strong style={{ color: "#fff" }}>#RTL-2048</strong> · livreur en route
           </p>
         </div>
         <div style={{ textAlign: "right" }}>
-          <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted)" }}>
+          <div className="on-bg-soft" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--muted)" }}>
             Arrivée estimée
           </div>
-          <div className="display" style={{ fontWeight: 700, fontSize: 34, color: "var(--accent)" }}>
+          <div className="display on-bg-gold" style={{ fontWeight: 700, fontSize: 34, color: "var(--accent)" }}>
             17 : 42
           </div>
         </div>

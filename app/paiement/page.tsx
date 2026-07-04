@@ -56,11 +56,12 @@ export default function PaiementPage() {
     <main style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px 80px" }}>
       <Link
         href="/panier"
+        className="on-bg-soft"
         style={{ color: "var(--muted)", fontWeight: 600, fontSize: 14, textDecoration: "none", display: "inline-block", marginBottom: 18 }}
       >
         ← Retour au panier
       </Link>
-      <h1 className="display" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 28 }}>
+      <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 28 }}>
         Paiement sécurisé
       </h1>
 

@@ -57,7 +57,7 @@ export default function DevisPage() {
 
   return (
     <main style={{ maxWidth: 720, margin: "0 auto", padding: "48px 24px 90px" }}>
-      <h1 className="display" style={{ fontSize: "clamp(32px,4.5vw,50px)", color: "var(--ink)", marginBottom: 12 }}>
+      <h1 className="display on-bg" style={{ fontSize: "clamp(32px,4.5vw,50px)", color: "var(--ink)", marginBottom: 12 }}>
         Demandez votre devis gratuitement
       </h1>
 
@@ -79,7 +79,7 @@ export default function DevisPage() {
         ⚡ Devis gratuit en moins de 24H
       </div>
 
-      <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, marginBottom: 30 }}>
+      <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, marginBottom: 30 }}>
         Décrivez votre besoin en quelques mots. Un conseiller vous répond avec une étude et un tarif adaptés à votre
         site, sans engagement.
       </p>
