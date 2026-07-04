@@ -5,8 +5,6 @@ import { useParams } from "next/navigation";
 import { useCart } from "@/lib/store";
 import { PRODUCTS, productById } from "@/lib/products";
 
-const THUMB_BG = "repeating-linear-gradient(135deg,#f0ece7 0 8px,#e8e3dd 8px 16px)";
-
 export default function ProductPage() {
   const params = useParams<{ id: string }>();
   const { add } = useCart();
@@ -44,19 +42,6 @@ export default function ProductPage() {
               alt={sel.name}
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10, marginTop: 10 }}>
-            {[0, 1, 2, 3].map((i) => (
-              <div
-                key={i}
-                style={{
-                  aspectRatio: "1 / 1",
-                  borderRadius: 6,
-                  backgroundImage: THUMB_BG,
-                  border: "1px solid var(--line)",
-                }}
-              />
-            ))}
           </div>
         </div>
 
