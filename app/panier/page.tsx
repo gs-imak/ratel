@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useCart } from "@/lib/store";
 
-const THUMB_BG = "repeating-linear-gradient(135deg,#f0ece7 0 9px,#e8e3dd 9px 18px)";
-
 export default function PanierPage() {
   const { items, changeQty, remove, subtotalLabel, shippingLabel, shipNote, totalLabel } = useCart();
   const empty = items.length === 0;
@@ -54,7 +52,10 @@ export default function PanierPage() {
                   alignItems: "center",
                 }}
               >
-                <div style={{ width: 74, height: 74, flex: "none", borderRadius: 6, backgroundImage: THUMB_BG }} />
+                <div style={{ width: 74, height: 74, flex: "none", borderRadius: 6, overflow: "hidden", background: "#fff", border: "1px solid var(--line)" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.img} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontWeight: 700, color: "var(--ink)", fontSize: 15.5 }}>{item.name}</div>
                   <div style={{ fontSize: 13, color: "var(--muted)" }}>

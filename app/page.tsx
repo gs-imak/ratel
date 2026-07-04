@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import HeroGraphic from "@/components/HeroGraphic";
 import { featured, PASS_STEPS, TRUST, ALERT_POINTS } from "@/lib/products";
 
 const MAX = 1200;
@@ -119,16 +118,17 @@ export default function HomePage() {
               style={{
                 aspectRatio: "4 / 5",
                 borderRadius: "var(--radius)",
-                background:
-                  "radial-gradient(120% 90% at 70% 20%, rgba(255,255,255,.06), transparent 60%), #0e0b08",
                 border: "1px solid rgba(255,255,255,.14)",
-                display: "grid",
-                placeItems: "center",
-                padding: 24,
                 overflow: "hidden",
+                background: "#0e0b08",
               }}
             >
-              <HeroGraphic />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/hero-fire.jpg"
+                alt="Flammes — un départ de feu"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
             </div>
             <div
               className="display"

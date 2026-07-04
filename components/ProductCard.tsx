@@ -4,9 +4,6 @@ import Link from "next/link";
 import { useCart } from "@/lib/store";
 import type { Product } from "@/lib/products";
 
-const PHOTO_BG =
-  "repeating-linear-gradient(135deg,#f0ece7 0 11px,#e8e3dd 11px 22px)";
-
 export default function ProductCard({
   product,
   variant = "shop",
@@ -26,18 +23,14 @@ export default function ProductCard({
         href={`/produit/${product.id}`}
         style={{ display: "block", textDecoration: "none" }}
       >
-        <div
-          style={{
-            aspectRatio: aspect,
-            backgroundImage: PHOTO_BG,
-            display: "flex",
-            alignItems: "flex-end",
-            padding: 12,
-          }}
-        >
-          <span style={{ fontFamily: "ui-monospace,monospace", fontSize: 10.5, color: "#9a948c" }}>
-            PHOTO · {product.id}
-          </span>
+        <div style={{ aspectRatio: aspect, background: "#fff", overflow: "hidden" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={product.img}
+            alt={product.name}
+            loading="lazy"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
         </div>
       </Link>
       <div style={{ padding: 18, display: "flex", flexDirection: "column", gap: 9, flex: 1 }}>

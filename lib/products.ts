@@ -10,6 +10,20 @@ export type Product = {
   blurb: string;
   priceLabel: string;
   kind: "extincteur" | "couverture" | "detecteur";
+  img: string;
+};
+
+/* Interim product photos (public/images) — replace files in place with the
+   client's own photos, keeping the same filenames. See public/images/CREDITS.md. */
+const PRODUCT_IMG: Record<string, string> = {
+  p1: "/images/ext-powder.jpg",
+  p2: "/images/ext-powder.jpg",
+  p3: "/images/ext-co2.jpg",
+  p4: "/images/ext-water.jpg",
+  p5: "/images/ext-powder.jpg",
+  p6: "/images/blanket.jpg",
+  p7: "/images/detector.jpg",
+  p8: "/images/ext-powder.jpg",
 };
 
 /** Format a number as French currency: 24,90 € (with non-breaking space). */
@@ -17,7 +31,7 @@ export function fmt(n: number): string {
   return n.toFixed(2).replace(".", ",") + " €";
 }
 
-const RAW: Omit<Product, "priceLabel" | "kind">[] = [
+const RAW: Omit<Product, "priceLabel" | "kind" | "img">[] = [
   { id: "p1", name: "Extincteur Poudre ABC 1 kg", type: "Poudre ABC", classes: "A B C", cap: "1 kg", price: 24.9, cat: "voiture", tag: "Voiture & 2 roues", blurb: "Compact, idéal pour la boîte à gants ou le coffre. Polyvalent : feux de solides, de liquides et de gaz." },
   { id: "p2", name: "Extincteur Poudre ABC 6 kg", type: "Poudre ABC", classes: "A B C", cap: "6 kg", price: 49.9, cat: "maison", tag: "Maison & garage", blurb: "La référence polyvalente pour la maison. Couvre la grande majorité des départs de feu domestiques." },
   { id: "p3", name: "Extincteur CO₂ 2 kg", type: "CO₂", classes: "B", cap: "2 kg", price: 64.9, cat: "cuisine", tag: "Électrique & cuisine", blurb: "N’endommage pas les appareils. Parfait pour les tableaux électriques et les équipements sous tension." },
@@ -36,6 +50,7 @@ export const PRODUCTS: Product[] = RAW.map((p) => ({
   ...p,
   priceLabel: fmt(p.price),
   kind: kindOf(p),
+  img: PRODUCT_IMG[p.id],
 }));
 
 export const FEATURED_IDS = ["p2", "p3", "p6"];

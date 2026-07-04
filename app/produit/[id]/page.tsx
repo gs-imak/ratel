@@ -33,16 +33,17 @@ export default function ProductPage() {
             style={{
               aspectRatio: "1 / 1",
               borderRadius: "var(--radius)",
-              backgroundImage: "repeating-linear-gradient(135deg,#f0ece7 0 13px,#e8e3dd 13px 26px)",
-              display: "flex",
-              alignItems: "flex-end",
-              padding: 16,
+              background: "#fff",
+              overflow: "hidden",
               border: "1px solid var(--line)",
             }}
           >
-            <span style={{ fontFamily: "ui-monospace,monospace", fontSize: 11, color: "#9a948c" }}>
-              PHOTO PRODUIT · {sel.id}
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={sel.img}
+              alt={sel.name}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10, marginTop: 10 }}>
             {[0, 1, 2, 3].map((i) => (
