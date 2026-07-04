@@ -22,12 +22,12 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Ratel — Prévention & Sécurité anti-incendie",
+  title: "Ratel — Prévention, formation & sécurité incendie",
   description:
     "Extincteurs certifiés NF/CE livrés vite et bien, et une alerte géolocalisée qui prévient les secours en un seul geste. La vie n'a pas de prix.",
   metadataBase: new URL("https://ratel-self.vercel.app"),
   openGraph: {
-    title: "Ratel — Prévention & Sécurité anti-incendie",
+    title: "Ratel — Prévention, formation & sécurité incendie",
     description:
       "Extincteurs certifiés et alerte géolocalisée. Protégez votre foyer, votre véhicule, votre entreprise.",
     type: "website",

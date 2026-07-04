@@ -1,3 +1,5 @@
+import Logo from "@/components/Logo";
+
 const COLS = [
   { title: "Boutique", items: ["Extincteurs", "Détecteurs", "Couvertures anti-feu", "Entreprises & ERP"] },
   { title: "Services", items: ["Alerte géolocalisée", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
@@ -18,24 +20,7 @@ export default function Footer() {
       >
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 14 }}>
-            <span
-              style={{
-                width: 38,
-                height: 38,
-                borderRadius: "var(--radius)",
-                background: "var(--accent)",
-                color: "#fff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-display)",
-                fontWeight: 700,
-                fontSize: 21,
-                textTransform: "uppercase",
-              }}
-            >
-              R
-            </span>
+            <Logo size={40} idPrefix="lf" />
             <span
               className="display"
               style={{ fontSize: 21, letterSpacing: "0.04em", textTransform: "uppercase", color: "#fff" }}
@@ -44,7 +29,7 @@ export default function Footer() {
             </span>
           </div>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, maxWidth: "22em" }}>
-            La vie n’a pas de prix. Prévention, équipement et alerte — pour protéger ce qui compte.
+            La vie n’a pas de prix. Prévention, formation et sécurité incendie — pour protéger ce qui compte.
           </p>
         </div>
 

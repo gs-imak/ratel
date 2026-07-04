@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/store";
+import Logo from "@/components/Logo";
 
 const NAV = [
   { href: "/", label: "Accueil", match: (p: string) => p === "/" },
@@ -42,25 +43,7 @@ export default function Header() {
         }}
       >
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
-          <span
-            style={{
-              width: 42,
-              height: 42,
-              borderRadius: "var(--radius)",
-              background: "var(--accent)",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: 24,
-              textTransform: "uppercase",
-              flex: "none",
-            }}
-          >
-            R
-          </span>
+          <Logo size={46} idPrefix="lh" />
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
             <span
               className="display"
@@ -77,7 +60,7 @@ export default function Header() {
                 fontWeight: 600,
               }}
             >
-              Prévention &amp; Sécurité anti-incendie
+              Prévention, formation &amp; sécurité incendie
             </span>
           </span>
         </Link>
