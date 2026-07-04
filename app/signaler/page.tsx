@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ReportMap from "@/components/ReportMap";
+import Eyebrow from "@/components/Eyebrow";
 import { REPORT_TYPES } from "@/lib/products";
 
 type Stage = "idle" | "locating" | "located" | "sent";
@@ -24,22 +25,7 @@ export default function SignalerPage() {
 
   return (
     <main style={{ maxWidth: 860, margin: "0 auto", padding: "44px 24px 80px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "var(--accent)",
-            background: "color-mix(in srgb, var(--accent) 10%, transparent)",
-            padding: "5px 12px",
-            borderRadius: 999,
-          }}
-        >
-          Réservé aux abonnés
-        </span>
-      </div>
+      <Eyebrow>Urgence · Réservé aux abonnés</Eyebrow>
       <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 10 }}>
         Signaler un incendie
       </h1>

@@ -1,4 +1,5 @@
 import TrackMap from "@/components/TrackMap";
+import Eyebrow from "@/components/Eyebrow";
 import { TIMELINE } from "@/lib/products";
 
 export default function SuiviPage() {
@@ -15,6 +16,7 @@ export default function SuiviPage() {
         }}
       >
         <div>
+          <Eyebrow>Livraison en cours</Eyebrow>
           <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", lineHeight: 1 }}>
             Suivi de livraison
           </h1>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Eyebrow from "@/components/Eyebrow";
 import { useCart } from "@/lib/store";
 
 export default function PanierPage() {
@@ -9,6 +10,7 @@ export default function PanierPage() {
 
   return (
     <main style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 80px" }}>
+      <Eyebrow>Votre commande</Eyebrow>
       <h1 className="display on-bg" style={{ fontSize: "clamp(32px,4vw,48px)", color: "var(--ink)", marginBottom: 28 }}>
         Votre panier
       </h1>
@@ -55,7 +57,7 @@ export default function PanierPage() {
               >
                 <div style={{ width: 74, height: 74, flex: "none", borderRadius: 6, overflow: "hidden", background: "#fff", border: "1px solid var(--line)" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.img} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  <img src={item.img} alt={item.name} className="pimg" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontWeight: 700, color: "var(--ink)", fontSize: 15.5 }}>{item.name}</div>

@@ -33,6 +33,7 @@
 }
 html {
   background: #c11620;
+  scroll-behavior: smooth;
 }
 body {
   /* red + yellow background (client request) — red field with a large gold
@@ -75,6 +76,46 @@ a {
 }
 .on-bg-gold {
   color: var(--hi) !important;
+}
+
+/* ---- Eyebrow system: one section-label language everywhere ---- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--hi);
+  margin-bottom: 14px;
+}
+.eyebrow-ink {
+  color: var(--ink);
+}
+.eyebrow-dash {
+  width: 26px;
+  height: 2px;
+  background: currentColor;
+  flex: none;
+}
+
+/* ---- Gold promo band: the single CTA-band style ---- */
+.band-gold {
+  background: linear-gradient(135deg, #f7c53a 0%, #f5b301 48%, #f0940c 100%);
+  color: var(--ink);
+}
+
+/* ---- Uniform product-photo treatment (evens out mixed source photos) ---- */
+.pimg {
+  filter: saturate(0.94) contrast(1.03);
+}
+
+/* ---- Brand focus states ---- */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--hi) 75%, transparent);
+  outline-offset: 2px;
 }
 
 /* ---- Buttons ---- */

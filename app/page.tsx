@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
+import Eyebrow from "@/components/Eyebrow";
 import { featured, PASS_STEPS, TRUST, ALERT_POINTS } from "@/lib/products";
 
 const MAX = 1200;
@@ -21,22 +22,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                fontSize: 12,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                fontWeight: 700,
-                color: "var(--accent)",
-                marginBottom: 22,
-              }}
-            >
-              <span style={{ width: 26, height: 2, background: "var(--accent)", display: "inline-block" }} />
-              Prévention · Sécurité · Réactivité
-            </div>
+            <Eyebrow style={{ marginBottom: 22 }}>Prévention · Formation · Sécurité incendie</Eyebrow>
             <h1
               className="display"
               style={{ fontWeight: 700, fontSize: "clamp(44px,6vw,76px)", lineHeight: 0.98, marginBottom: 24 }}
@@ -205,19 +191,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <div
-              className="on-bg-gold"
-              style={{
-                fontSize: 12,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                fontWeight: 700,
-                color: "var(--accent)",
-                marginBottom: 12,
-              }}
-            >
-              Animation — savoir réagir
-            </div>
+            <Eyebrow style={{ marginBottom: 12 }}>Animation — savoir réagir</Eyebrow>
             <h2 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", lineHeight: 1, color: "var(--ink)" }}>
               La méthode en 4 gestes
             </h2>
@@ -311,6 +285,7 @@ export default function HomePage() {
 
       {/* ---------------- FEATURED ---------------- */}
       <section style={{ maxWidth: MAX, margin: "0 auto", padding: "0 24px 84px" }}>
+        <Eyebrow>La boutique</Eyebrow>
         <div
           style={{
             display: "flex",
@@ -337,8 +312,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- ALERT TEASER ---------------- */}
-      <section style={{ background: "var(--accent)", color: "#fff" }}>
+      {/* ---------------- ALERT TEASER (gold promo band) ---------------- */}
+      <section className="band-gold">
         <div
           style={{
             maxWidth: MAX,
@@ -351,18 +326,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <div
-              style={{
-                fontSize: 12,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                fontWeight: 700,
-                color: "rgba(255,255,255,.8)",
-                marginBottom: 14,
-              }}
-            >
-              Réservé aux abonnés Ratel
-            </div>
+            <Eyebrow tone="ink">Réservé aux abonnés Ratel</Eyebrow>
             <h2
               className="display"
               style={{ fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", lineHeight: 1.02, marginBottom: 18 }}
@@ -375,7 +339,7 @@ export default function HomePage() {
               style={{
                 fontSize: 17,
                 lineHeight: 1.6,
-                color: "rgba(255,255,255,.85)",
+                color: "rgba(22,17,13,.78)",
                 maxWidth: "30em",
                 marginBottom: 28,
               }}
@@ -385,13 +349,10 @@ export default function HomePage() {
             </p>
             <Link
               href="/signaler"
+              className="btn-accent"
               style={{
                 display: "inline-block",
                 padding: "16px 28px",
-                background: "#fff",
-                color: "var(--accent)",
-                borderRadius: "var(--radius)",
-                fontWeight: 700,
                 fontSize: 15.5,
                 textDecoration: "none",
               }}
@@ -403,20 +364,21 @@ export default function HomePage() {
             {ALERT_POINTS.map((a) => (
               <div
                 key={a.n}
+                className="card"
                 style={{
                   display: "flex",
                   gap: 14,
                   alignItems: "center",
-                  background: "rgba(255,255,255,.12)",
-                  border: "1px solid rgba(255,255,255,.22)",
-                  borderRadius: "var(--radius)",
                   padding: 18,
                 }}
               >
-                <span className="display" style={{ fontWeight: 700, fontSize: 22, width: 38, flex: "none" }}>
+                <span
+                  className="display"
+                  style={{ fontWeight: 700, fontSize: 22, width: 38, flex: "none", color: "var(--accent)" }}
+                >
                   {a.n}
                 </span>
-                <span style={{ fontSize: 15, lineHeight: 1.45 }}>{a.t}</span>
+                <span style={{ fontSize: 15, lineHeight: 1.45, color: "var(--ink)" }}>{a.t}</span>
               </div>
             ))}
           </div>

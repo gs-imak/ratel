@@ -6,6 +6,8 @@ const COLS = [
 export default function Footer() {
   return (
     <footer style={{ background: "var(--ink)", color: "rgba(255,255,255,.7)" }}>
+      {/* mirrors the header caution stripe — bookends every page */}
+      <div className="hazard" />
       <div
         style={{
           maxWidth: 1200,
@@ -117,7 +119,7 @@ export default function Footer() {
             color: "rgba(255,255,255,.5)",
           }}
         >
-          <span>© 2026 Ratel — Prévention &amp; Sécurité anti-incendie</span>
+          <span>© 2026 Ratel — Prévention, formation et sécurité incendie</span>
           <span>Paiement sécurisé · Mentions légales · CGV</span>
         </div>
       </div>

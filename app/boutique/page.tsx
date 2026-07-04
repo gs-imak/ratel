@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ProductCard from "@/components/ProductCard";
+import Eyebrow from "@/components/Eyebrow";
 import { PRODUCTS, CATEGORIES } from "@/lib/products";
 
 export default function BoutiquePage() {
@@ -11,6 +12,7 @@ export default function BoutiquePage() {
   return (
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 80px" }}>
       <div style={{ marginBottom: 30 }}>
+        <Eyebrow>Catalogue certifié NF · CE · EN 3</Eyebrow>
         <h1 className="display on-bg" style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 10 }}>
           Boutique
         </h1>

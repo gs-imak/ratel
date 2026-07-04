@@ -1,27 +1,12 @@
 import Link from "next/link";
+import Eyebrow from "@/components/Eyebrow";
 import { SECTORS } from "@/lib/products";
 
 export default function SecteursPage() {
   return (
     <main style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 80px" }}>
       <div style={{ maxWidth: "46em", marginBottom: 36 }}>
-        <div
-          className="on-bg-gold"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 10,
-            fontSize: 12,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            fontWeight: 700,
-            color: "var(--accent)",
-            marginBottom: 14,
-          }}
-        >
-          <span style={{ width: 26, height: 2, background: "var(--hi)", display: "inline-block" }} />
-          Solutions par secteur
-        </div>
+        <Eyebrow>Solutions par secteur</Eyebrow>
         <h1 className="display on-bg" style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 12 }}>
           Chaque secteur, son risque
         </h1>
@@ -69,10 +54,9 @@ export default function SecteursPage() {
 
       {/* bottom CTA */}
       <div
+        className="band-gold"
         style={{
           marginTop: 44,
-          background: "var(--ink)",
-          color: "#fff",
           borderRadius: "var(--radius)",
           padding: "40px 32px",
           display: "flex",
@@ -86,13 +70,13 @@ export default function SecteursPage() {
           <h2 className="display" style={{ fontSize: "clamp(24px,3vw,34px)", marginBottom: 8 }}>
             Un projet, un site à équiper ?
           </h2>
-          <p style={{ color: "rgba(255,255,255,.75)", fontSize: 15.5, maxWidth: "34em" }}>
+          <p style={{ color: "rgba(22,17,13,.75)", fontSize: 15.5, maxWidth: "34em" }}>
             Recevez une étude et un devis gratuits, adaptés à votre secteur, en moins de 24 heures.
           </p>
         </div>
         <Link
           href="/devis"
-          className="btn-hi"
+          className="btn-accent"
           style={{ padding: "16px 26px", fontSize: 15.5, textDecoration: "none", whiteSpace: "nowrap" }}
         >
           Devis gratuit →

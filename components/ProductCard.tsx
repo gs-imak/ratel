@@ -29,6 +29,7 @@ export default function ProductCard({
             src={product.img}
             alt={product.name}
             loading="lazy"
+            className="pimg"
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
         </div>

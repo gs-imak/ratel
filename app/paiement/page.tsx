@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Eyebrow from "@/components/Eyebrow";
 import { useCart } from "@/lib/store";
 
 export default function PaiementPage() {
@@ -61,6 +62,7 @@ export default function PaiementPage() {
       >
         ← Retour au panier
       </Link>
+      <Eyebrow>Finalisation de commande</Eyebrow>
       <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 28 }}>
         Paiement sécurisé
       </h1>
