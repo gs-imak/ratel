@@ -12,7 +12,9 @@ export default function ProductCard({
   variant?: "featured" | "shop";
 }) {
   const { add } = useCart();
-  const aspect = variant === "featured" ? "4 / 3" : "1 / 1";
+  // One image ratio across the whole catalog (also keeps the client's square
+  // marketing visual uncropped).
+  const aspect = "1 / 1";
 
   return (
     <div
