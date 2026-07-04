@@ -42,6 +42,25 @@ export default function Header() {
         }}
       >
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
+          <span
+            style={{
+              width: 42,
+              height: 42,
+              borderRadius: "var(--radius)",
+              background: "var(--accent)",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              fontSize: 24,
+              textTransform: "uppercase",
+              flex: "none",
+            }}
+          >
+            R
+          </span>
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
             <span
               className="display"

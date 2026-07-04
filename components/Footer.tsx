@@ -19,6 +19,24 @@ export default function Footer() {
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 14 }}>
             <span
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: "var(--radius)",
+                background: "var(--accent)",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                fontSize: 21,
+                textTransform: "uppercase",
+              }}
+            >
+              R
+            </span>
+            <span
               className="display"
               style={{ fontSize: 21, letterSpacing: "0.04em", textTransform: "uppercase", color: "#fff" }}
             >
