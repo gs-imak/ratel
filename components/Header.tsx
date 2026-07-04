@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/store";
-import Logo from "@/components/Logo";
 
 const NAV = [
   { href: "/", label: "Accueil", match: (p: string) => p === "/" },
@@ -43,7 +42,6 @@ export default function Header() {
         }}
       >
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
-          <Logo size={46} idPrefix="lh" />
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
             <span
               className="display"

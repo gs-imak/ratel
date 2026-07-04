@@ -1,5 +1,3 @@
-import Logo from "@/components/Logo";
-
 const COLS = [
   { title: "Boutique", items: ["Extincteurs", "Détecteurs", "Couvertures anti-feu", "Entreprises & ERP"] },
   { title: "Services", items: ["Alerte géolocalisée", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
@@ -20,7 +18,6 @@ export default function Footer() {
       >
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 14 }}>
-            <Logo size={40} idPrefix="lf" />
             <span
               className="display"
               style={{ fontSize: 21, letterSpacing: "0.04em", textTransform: "uppercase", color: "#fff" }}
