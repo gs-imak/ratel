@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCart, useTheme } from "@/lib/store";
+import { useCart } from "@/lib/store";
 
 const NAV = [
   { href: "/", label: "Accueil", match: (p: string) => p === "/" },
   { href: "/boutique", label: "Boutique", match: (p: string) => p.startsWith("/boutique") || p.startsWith("/produit") },
+  { href: "/secteurs", label: "Secteurs", match: (p: string) => p.startsWith("/secteurs") },
   { href: "/#demo", label: "Démo", match: () => false },
   { href: "/signaler", label: "Signaler", match: (p: string) => p.startsWith("/signaler") },
   { href: "/suivi", label: "Suivi", match: (p: string) => p.startsWith("/suivi") },
@@ -14,7 +15,6 @@ const NAV = [
 
 export default function Header() {
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
   const { count } = useCart();
 
   return (
@@ -28,6 +28,8 @@ export default function Header() {
         backdropFilter: "saturate(1.1)",
       }}
     >
+      {/* fire-safety caution stripe */}
+      <div className="hazard" />
       <div
         style={{
           maxWidth: 1200,
@@ -39,10 +41,7 @@ export default function Header() {
           flexWrap: "wrap",
         }}
       >
-        <Link
-          href="/"
-          style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}
-        >
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
           <span
             style={{
               width: 42,
@@ -83,15 +82,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav
-          style={{
-            display: "flex",
-            gap: 22,
-            alignItems: "center",
-            marginLeft: "auto",
-            flexWrap: "wrap",
-          }}
-        >
+        <nav style={{ display: "flex", gap: 20, alignItems: "center", marginLeft: "auto", flexWrap: "wrap" }}>
           {NAV.map((n) => {
             const active = n.match(pathname);
             return (
@@ -114,36 +105,21 @@ export default function Header() {
           })}
         </nav>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div
-            title="Comparez les deux directions visuelles"
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <Link
+            href="/devis"
+            className="btn-hi"
             style={{
-              display: "flex",
-              border: "1px solid var(--line)",
-              borderRadius: 999,
-              padding: 3,
-              gap: 2,
+              padding: "9px 16px",
+              fontSize: 14,
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
             }}
           >
-            {(["caserne", "serenite"] as const).map((t) => (
-              <button
-                key={t}
-                onClick={() => setTheme(t)}
-                style={{
-                  padding: "6px 14px",
-                  border: "none",
-                  borderRadius: 999,
-                  fontSize: 12.5,
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  background: theme === t ? "var(--accent)" : "transparent",
-                  color: theme === t ? "#fff" : "var(--muted)",
-                }}
-              >
-                {t === "caserne" ? "Caserne" : "Sérénité"}
-              </button>
-            ))}
-          </div>
+            Devis gratuit
+          </Link>
           <Link
             href="/panier"
             style={{

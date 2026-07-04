@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Ratel design system — two visual directions as theme classes
+   Ratel design system — single palette
+   Red = primary / brand · Yellow = highlights & warnings ·
+   Blue = certifications, links, trust
    ============================================================ */
-.theme-caserne {
-  --accent: #d81e27;
+.theme-ratel {
+  --accent: #d81e27; /* red — primary CTAs / brand */
   --accent-deep: #9e1218;
+  --hi: #f5b301; /* yellow — highlights, warning strips */
+  --hi-deep: #d99500;
+  --hi-ink: #16110d; /* dark text on yellow */
+  --trust: #1e63b0; /* blue — certifications, links */
+  --trust-deep: #164e8a;
+
   --ink: #16110d;
   --bg: #f6f1eb;
   --surface: #ffffff;
@@ -15,20 +23,6 @@
   --radius: 4px;
   --display-transform: uppercase;
   --display-spacing: 0.01em;
-  --display-weight: 600;
-}
-.theme-serenite {
-  --accent: #d81e27;
-  --accent-deep: #9e1218;
-  --ink: #1b1a18;
-  --bg: #fbf9f7;
-  --surface: #ffffff;
-  --line: rgba(27, 26, 24, 0.1);
-  --muted: #726c66;
-  --font-display: var(--font-source-serif), Georgia, serif;
-  --radius: 15px;
-  --display-transform: none;
-  --display-spacing: -0.01em;
   --display-weight: 600;
 }
 
@@ -48,14 +42,14 @@ button {
   font: inherit;
 }
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 a {
   color: inherit;
 }
 
-/* Display / heading helper */
 .display {
   font-family: var(--font-display);
   font-weight: var(--display-weight);
@@ -63,7 +57,7 @@ a {
   letter-spacing: var(--display-spacing);
 }
 
-/* ---- Reusable components ---- */
+/* ---- Buttons ---- */
 .btn-accent {
   background: var(--accent);
   color: #fff;
@@ -77,12 +71,65 @@ a {
   background: var(--accent-deep);
 }
 
+.btn-hi {
+  background: var(--hi);
+  color: var(--hi-ink);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+.btn-hi:hover {
+  background: var(--hi-deep);
+}
+
+/* ---- Links (blue) ---- */
+.link-blue {
+  color: var(--trust);
+  font-weight: 700;
+  text-decoration: none;
+}
+.link-blue:hover {
+  color: var(--trust-deep);
+  text-decoration: underline;
+}
+
+/* ---- Certification badge (blue) ---- */
+.badge-cert {
+  border: 1px solid color-mix(in srgb, var(--trust) 55%, transparent);
+  color: var(--trust);
+  background: color-mix(in srgb, var(--trust) 8%, transparent);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* ---- Yellow hazard caution stripe ---- */
+.hazard {
+  height: 5px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--hi) 0 14px,
+    #16110d 14px 28px
+  );
+}
+
+/* ---- Yellow warning callout ---- */
+.warn {
+  border-left: 4px solid var(--hi);
+  background: color-mix(in srgb, var(--hi) 12%, transparent);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
 .card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
   overflow: hidden;
-  transition: border-color 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 .card-hover:hover {
   border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
@@ -98,9 +145,9 @@ a {
   min-width: 0;
 }
 .fld:focus {
-  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--trust) 45%, transparent);
   outline-offset: 1px;
-  border-color: var(--accent);
+  border-color: var(--trust);
 }
 
 .lbl {
@@ -112,7 +159,7 @@ a {
   min-width: 0;
 }
 
-/* ---- Animations (only the ones the live design uses) ---- */
+/* ---- Animations ---- */
 @keyframes ratPulse {
   0% {
     box-shadow: 0 0 0 0 rgba(216, 29, 39, 0.55);
@@ -129,14 +176,15 @@ a {
     transform: rotate(360deg);
   }
 }
-@keyframes ratFade {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+@keyframes ratFlicker {
+  0%,
+  100% {
+    transform: scaleY(1) skewX(0deg);
+    opacity: 0.95;
   }
-  to {
+  50% {
+    transform: scaleY(1.08) skewX(-3deg);
     opacity: 1;
-    transform: translateY(0);
   }
 }
 .rat-pulse {
@@ -145,19 +193,19 @@ a {
 .rat-spin {
   animation: ratSpin 0.8s linear infinite;
 }
-.rat-fade {
-  animation: ratFade 0.5s ease both;
+.rat-flame {
+  transform-origin: bottom center;
+  animation: ratFlicker 1.6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rat-pulse,
   .rat-spin,
-  .rat-fade {
+  .rat-flame {
     animation: none;
   }
 }
 
-/* Leaflet container sizing safety */
 .leaflet-container {
   font-family: var(--font-public-sans), system-ui, sans-serif;
 }

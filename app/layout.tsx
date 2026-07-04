@@ -44,7 +44,7 @@ export default function RootLayout({
       className={`${oswald.variable} ${publicSans.variable} ${sourceSerif.variable}`}
     >
       <body
-        className="theme-caserne"
+        className="theme-ratel"
         style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
       >
         <Providers>

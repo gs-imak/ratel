@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
+import HeroGraphic from "@/components/HeroGraphic";
 import { featured, PASS_STEPS, TRUST, ALERT_POINTS } from "@/lib/products";
 
 const MAX = 1200;
@@ -118,27 +119,16 @@ export default function HomePage() {
               style={{
                 aspectRatio: "4 / 5",
                 borderRadius: "var(--radius)",
-                backgroundImage:
-                  "repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 12px,rgba(255,255,255,.09) 12px 24px)",
+                background:
+                  "radial-gradient(120% 90% at 70% 20%, rgba(255,255,255,.06), transparent 60%), #0e0b08",
                 border: "1px solid rgba(255,255,255,.14)",
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "flex-start",
-                padding: 18,
+                display: "grid",
+                placeItems: "center",
+                padding: 24,
+                overflow: "hidden",
               }}
             >
-              <span
-                style={{
-                  fontFamily: "ui-monospace,Menlo,monospace",
-                  fontSize: 12,
-                  color: "rgba(255,255,255,.55)",
-                  background: "rgba(0,0,0,.35)",
-                  padding: "6px 10px",
-                  borderRadius: 4,
-                }}
-              >
-                VISUEL — photo à venir
-              </span>
+              <HeroGraphic />
             </div>
             <div
               className="display"
@@ -146,15 +136,15 @@ export default function HomePage() {
                 position: "absolute",
                 top: -16,
                 right: -12,
-                background: "var(--accent)",
-                color: "#fff",
+                background: "var(--hi)",
+                color: "var(--hi-ink)",
                 padding: "14px 18px",
                 borderRadius: "var(--radius)",
                 textTransform: "uppercase",
                 letterSpacing: "0.04em",
                 fontWeight: 700,
                 fontSize: 15,
-                boxShadow: "0 18px 40px rgba(216,29,39,.4)",
+                boxShadow: "0 18px 40px rgba(245,179,1,.35)",
               }}
             >
               Chaque seconde compte
@@ -310,7 +300,7 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-            <p style={{ fontSize: 13, color: "var(--muted)", marginTop: 16, lineHeight: 1.5 }}>
+            <p className="warn" style={{ fontSize: 13, color: "var(--muted)", marginTop: 16, lineHeight: 1.5 }}>
               En cas de doute ou de fumée importante, n’insistez pas :{" "}
               <strong style={{ color: "var(--ink)" }}>évacuez et appelez le 18 / 112</strong>.
             </p>
@@ -333,10 +323,7 @@ export default function HomePage() {
           <h2 className="display" style={{ fontSize: "clamp(28px,3.4vw,40px)", color: "var(--ink)" }}>
             Les plus choisis
           </h2>
-          <Link
-            href="/boutique"
-            style={{ color: "var(--accent)", fontWeight: 700, fontSize: 15, textDecoration: "none" }}
-          >
+          <Link href="/boutique" className="link-blue" style={{ fontSize: 15 }}>
             Voir toute la boutique →
           </Link>
         </div>

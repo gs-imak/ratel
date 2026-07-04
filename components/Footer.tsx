@@ -88,11 +88,12 @@ export default function Footer() {
               <span
                 key={c}
                 style={{
-                  border: "1px solid rgba(255,255,255,.25)",
+                  border: "1px solid rgba(120,170,230,.55)",
+                  background: "rgba(30,99,176,.22)",
                   padding: "6px 12px",
                   borderRadius: 6,
                   fontWeight: 700,
-                  color: "#fff",
+                  color: "#cfe0f5",
                   fontSize: 13,
                 }}
               >

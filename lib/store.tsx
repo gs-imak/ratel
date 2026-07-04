@@ -17,39 +17,6 @@ import {
   type Product,
 } from "./products";
 
-/* ----------------------------- Theme ----------------------------- */
-export type ThemeName = "caserne" | "serenite";
-
-type ThemeCtx = { theme: ThemeName; setTheme: (t: ThemeName) => void };
-const ThemeContext = createContext<ThemeCtx | null>(null);
-
-function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<ThemeName>("caserne");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("ratel.theme") as ThemeName | null;
-    if (saved === "caserne" || saved === "serenite") setTheme(saved);
-  }, []);
-
-  useEffect(() => {
-    document.body.classList.remove("theme-caserne", "theme-serenite");
-    document.body.classList.add(`theme-${theme}`);
-    localStorage.setItem("ratel.theme", theme);
-  }, [theme]);
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-export function useTheme(): ThemeCtx {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used within Providers");
-  return ctx;
-}
-
 /* ----------------------------- Cart ------------------------------ */
 export type CartLine = Product & { qty: number; lineLabel: string };
 
@@ -72,7 +39,7 @@ const CartContext = createContext<CartCtx | null>(null);
 
 const INITIAL_CART: CartState = { p2: 1, p7: 2 };
 
-function CartProvider({ children }: { children: ReactNode }) {
+export function Providers({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartState>(INITIAL_CART);
 
   useEffect(() => {
@@ -90,8 +57,7 @@ function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("ratel.cart", JSON.stringify(cart));
   }, [cart]);
 
-  const add = (id: string) =>
-    setCart((c) => ({ ...c, [id]: (c[id] || 0) + 1 }));
+  const add = (id: string) => setCart((c) => ({ ...c, [id]: (c[id] || 0) + 1 }));
 
   const changeQty = (id: string, delta: number) =>
     setCart((c) => {
@@ -147,15 +113,6 @@ export function useCart(): CartCtx {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error("useCart must be used within Providers");
   return ctx;
-}
-
-/* --------------------------- Providers --------------------------- */
-export function Providers({ children }: { children: ReactNode }) {
-  return (
-    <ThemeProvider>
-      <CartProvider>{children}</CartProvider>
-    </ThemeProvider>
-  );
 }
 
 export { PRODUCTS };

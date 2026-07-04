@@ -63,8 +63,20 @@ export const PASS_STEPS = [
 export const TRUST = [
   { title: "Matériel certifié", desc: "Normes NF, CE et EN 3 garanties." },
   { title: "Livraison 24-48h", desc: "Expédition rapide et suivie." },
-  { title: "Garantie 5 ans", desc: "Sur tous les extincteurs." },
+  { title: "Garantie 6 mois", desc: "Sur tous les extincteurs." },
   { title: "Conseil expert", desc: "Le bon appareil pour votre risque." },
+];
+
+export type Sector = { id: string; label: string; icon: string; desc: string };
+
+export const SECTORS: Sector[] = [
+  { id: "aeroport", label: "Aéroport", icon: "✈️", desc: "Zones à forte affluence et risques électriques : extincteurs CO₂, signalétique et couverture ERP conformes." },
+  { id: "hopitaux", label: "Hôpitaux", icon: "🏥", desc: "Établissements de santé : équipements adaptés aux locaux sensibles et aux circulations d’évacuation." },
+  { id: "station-service", label: "Station-service", icon: "⛽", desc: "Liquides inflammables : extincteurs poudre et mousse, contrôle réglementaire périodique." },
+  { id: "salle-festivites", label: "Salle de festivités", icon: "🎉", desc: "Public nombreux : extincteurs accessibles, couverture ERP et plan d’évacuation." },
+  { id: "scolaire", label: "Établissements scolaires", icon: "🏫", desc: "Écoles et collèges : sécurité des élèves, détecteurs et extincteurs vérifiés." },
+  { id: "universite", label: "Université", icon: "🎓", desc: "Campus, amphis et laboratoires : protection adaptée aux locaux à risque." },
+  { id: "batiment", label: "Bâtiment", icon: "🏢", desc: "Immeubles et copropriétés : équipement des parties communes et maintenance." },
 ];
 
 export const ALERT_POINTS = [

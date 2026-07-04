@@ -139,7 +139,7 @@ export default function ProductPage() {
           </div>
           <div style={{ display: "flex", gap: 22, marginTop: 18, flexWrap: "wrap", fontSize: 13.5, color: "var(--muted)" }}>
             <span>🚚 Livraison 24-48h</span>
-            <span>🛡️ Garantie 5 ans</span>
+            <span>🛡️ Garantie 6 mois</span>
             <span>↩ Retour 30 jours</span>
           </div>
         </div>
