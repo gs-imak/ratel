@@ -32,17 +32,15 @@
   padding: 0;
 }
 html {
-  background: #c11620;
+  background: #a91219;
   scroll-behavior: smooth;
 }
 body {
-  /* red + yellow background (client request) — red field with a large gold
-     glow so both colours read clearly while text stays legible */
-  background:
-    radial-gradient(120% 95% at 88% 6%, rgba(245, 179, 1, 0.85), rgba(245, 179, 1, 0) 52%),
-    radial-gradient(90% 70% at 6% 100%, rgba(245, 160, 10, 0.5), rgba(245, 160, 10, 0) 55%),
-    linear-gradient(158deg, #e0242c 0%, #c81620 52%, #a51018 100%);
-  background-attachment: fixed;
+  /* Red + yellow direction, with PREDICTABLE contrast:
+     the page field is always deep red (white text is always legible on it);
+     yellow appears only in controlled zones — gold bands, hazard stripes,
+     gold accents — never underneath body text. */
+  background: linear-gradient(180deg, #d92028 0%, #c11620 34%, #a91219 100%);
   color: var(--ink);
   font-family: var(--font-public-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
