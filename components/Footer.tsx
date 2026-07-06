@@ -20,23 +20,21 @@ export default function Footer() {
       >
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 14 }}>
+            {/* white chip so the emblem's black/dark shapes stay visible on the dark footer */}
             <span
               style={{
-                width: 38,
-                height: 38,
-                borderRadius: "var(--radius)",
-                background: "var(--accent)",
-                color: "#fff",
+                width: 42,
+                height: 42,
+                borderRadius: 8,
+                background: "#fff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: "var(--font-display)",
-                fontWeight: 700,
-                fontSize: 21,
-                textTransform: "uppercase",
+                flex: "none",
               }}
             >
-              R
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-emblem.svg" alt="" style={{ width: 34, height: 34, display: "block" }} />
             </span>
             <span
               className="display"
