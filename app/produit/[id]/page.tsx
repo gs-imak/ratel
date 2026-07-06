@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useCart } from "@/lib/store";
@@ -9,6 +10,11 @@ export default function ProductPage() {
   const params = useParams<{ id: string }>();
   const { add } = useCart();
   const sel = productById(params.id) ?? PRODUCTS[0];
+
+  const gallery = sel.gallery ?? [sel.img];
+  const [imgIdx, setImgIdx] = useState(0);
+  useEffect(() => setImgIdx(0), [sel.id]);
+  const mainImg = gallery[imgIdx] ?? sel.img;
 
   const meta: [string, string][] = [
     ["Agent", sel.type],
@@ -39,12 +45,40 @@ export default function ProductPage() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={sel.img}
+              src={mainImg}
               alt={sel.name}
               className="pimg"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
           </div>
+          {gallery.length > 1 && (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 10, marginTop: 10 }}>
+              {gallery.map((g, i) => (
+                <button
+                  key={g}
+                  onClick={() => setImgIdx(i)}
+                  aria-label={`Photo ${i + 1}`}
+                  style={{
+                    aspectRatio: "1 / 1",
+                    borderRadius: 6,
+                    overflow: "hidden",
+                    padding: 0,
+                    cursor: "pointer",
+                    background: "#fff",
+                    border: i === imgIdx ? "2px solid var(--accent)" : "1px solid var(--line)",
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={g}
+                    alt=""
+                    loading="lazy"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div>

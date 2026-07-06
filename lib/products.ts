@@ -11,6 +11,7 @@ export type Product = {
   priceLabel: string;
   kind: "extincteur" | "couverture" | "detecteur";
   img: string;
+  gallery?: string[];
 };
 
 /* Interim product photos (public/images) — replace files in place with the
@@ -24,7 +25,18 @@ const PRODUCT_IMG: Record<string, string> = {
   p6: "/images/blanket.jpg",
   p7: "/images/detector.jpg",
   p8: "/images/ext-powder.jpg",
-  p9: "/images/reinold-max.jpg", // client-supplied visual (REINOLD MAX spray)
+  p9: "/images/firestop-3.jpg", // client-supplied supplier photos (VEAE FIRE STOP)
+};
+
+/* Extra views for the product-page gallery (client-supplied). */
+const PRODUCT_GALLERY: Record<string, string[]> = {
+  p9: [
+    "/images/firestop-3.jpg", // marketing shot + use cases
+    "/images/firestop-2.jpg", // front + back with bracket
+    "/images/firestop-4.jpg", // carton 24 pcs
+    "/images/firestop-1.jpg", // four bottles
+    "/images/reinold-max.jpg", // earlier multi-usage visual
+  ],
 };
 
 /** Format a number as French currency: 24,90 € (with non-breaking space). */
@@ -41,7 +53,7 @@ const RAW: Omit<Product, "priceLabel" | "kind" | "img">[] = [
   { id: "p6", name: "Couverture anti-feu 1,2 m", type: "Couverture", classes: "F", cap: "1,2 m", price: 18.9, cat: "cuisine", tag: "Cuisine", blurb: "Étouffe instantanément un feu de friture ou de poêle. Un geste simple, une vie sauvée." },
   { id: "p7", name: "Détecteur de fumée NF", type: "DAAF", classes: "—", cap: "pile 10 ans", price: 12.9, cat: "maison", tag: "Maison", blurb: "Détecteur autonome certifié NF, pile longue durée. Obligatoire dans chaque logement." },
   { id: "p8", name: "Extincteur Poudre ABC 2 kg", type: "Poudre ABC", classes: "A B C", cap: "2 kg", price: 32.9, cat: "voiture", tag: "Voiture", blurb: "Le bon compromis encombrement / autonomie pour la voiture familiale." },
-  { id: "p9", name: "Extincteur compact multi-usages", type: "Spray extincteur", classes: "A B F", cap: "750 ml", price: 29.9, cat: "maison", tag: "Multi-usages", blurb: "Le spray compact à garder partout : maison, voiture, camping, bateau. Prêt à l’emploi en un geste, idéal pour les petits départs de feu." },
+  { id: "p9", name: "Extincteur compact multi-usages 500 ml", type: "Spray extincteur", classes: "A B F", cap: "500 ml", price: 29.9, cat: "maison", tag: "Multi-usages", blurb: "Le spray compact à garder partout : maison, voiture, camping, bateau. Support mural inclus, prêt à l’emploi en un geste — idéal pour les petits départs de feu." },
 ];
 
 function kindOf(p: { id: string }): Product["kind"] {
@@ -53,6 +65,7 @@ export const PRODUCTS: Product[] = RAW.map((p) => ({
   priceLabel: fmt(p.price),
   kind: kindOf(p),
   img: PRODUCT_IMG[p.id],
+  gallery: PRODUCT_GALLERY[p.id],
 }));
 
 export const FEATURED_IDS = ["p9", "p2", "p3"];
