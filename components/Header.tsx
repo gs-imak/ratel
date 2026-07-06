@@ -70,7 +70,7 @@ export default function Header() {
                 fontWeight: 600,
               }}
             >
-              Prévention, formation &amp; sécurité incendie
+              Prévention &amp; Sécurité incendie
             </span>
           </span>
         </Link>

@@ -1,6 +1,6 @@
 const COLS = [
   { title: "Boutique", items: ["Extincteurs", "Détecteurs", "Couvertures anti-feu", "Entreprises & ERP"] },
-  { title: "Services", items: ["Alerte géolocalisée", "Plans d'évacuation NF X 08-070", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
+  { title: "Services", items: ["Alerte géolocalisée", "Plans d'évacuation NF X 08-070", "Formation en entreprise", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
 ];
 
 export default function Footer() {
@@ -50,7 +50,7 @@ export default function Footer() {
             </span>
           </div>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, maxWidth: "22em" }}>
-            La vie n’a pas de prix. Prévention, formation et sécurité incendie — pour protéger ce qui compte.
+            La vie n’a pas de prix. Prévention et sécurité incendie — pour protéger ce qui compte.
           </p>
         </div>
 
@@ -123,7 +123,7 @@ export default function Footer() {
             color: "rgba(255,255,255,.5)",
           }}
         >
-          <span>© 2026 Ratel — Prévention, formation et sécurité incendie</span>
+          <span>© 2026 Ratel — Prévention &amp; Sécurité incendie</span>
           <span>Paiement sécurisé · Mentions légales · CGV</span>
         </div>
       </div>

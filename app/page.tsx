@@ -22,7 +22,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <Eyebrow style={{ marginBottom: 22 }}>Prévention · Formation · Sécurité incendie</Eyebrow>
+            <Eyebrow style={{ marginBottom: 22 }}>Prévention · Sécurité incendie</Eyebrow>
             <h1
               className="display"
               style={{ fontWeight: 700, fontSize: "clamp(44px,6vw,76px)", lineHeight: 0.98, marginBottom: 24 }}
