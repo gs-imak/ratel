@@ -6,7 +6,7 @@ import Eyebrow from "@/components/Eyebrow";
 import { REPORT_TYPES } from "@/lib/products";
 
 type Stage = "idle" | "locating" | "located" | "sent";
-const COORDS = "45.7589° N, 4.8472° E";
+const COORDS = "4.3388° S, 15.3073° E";
 
 export default function SignalerPage() {
   const [stage, setStage] = useState<Stage>("idle");
@@ -30,7 +30,7 @@ export default function SignalerPage() {
         Signaler un incendie
       </h1>
       <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 30 }}>
-        En cas d’urgence réelle, déclenchez l’alerte. Votre position GPS sera transmise aux secours (18 · 112) et à vos
+        En cas d’urgence réelle, déclenchez l’alerte. Votre position GPS sera transmise aux secours (118) et à vos
         contacts de confiance.
       </p>
 
@@ -189,7 +189,7 @@ export default function SignalerPage() {
                 <div style={{ fontSize: 13.5, color: "var(--ink)" }}>
                   <strong>Position confirmée</strong> · {COORDS}
                   <br />
-                  <span style={{ color: "var(--muted)" }}>14 rue des Lilas, 69003 Lyon (précision ±8 m)</span>
+                  <span style={{ color: "var(--muted)" }}>Avenue de la Victoire, Kinshasa (précision ±8 m)</span>
                 </div>
               </div>
               <button
@@ -200,7 +200,7 @@ export default function SignalerPage() {
                 Envoyer l’alerte aux secours
               </button>
               <p style={{ textAlign: "center", fontSize: 12.5, color: "var(--muted)", marginTop: 12 }}>
-                Les services d’urgence (18 · 112) et vos contacts seront notifiés avec votre position.
+                Les services d’urgence (118) et vos contacts seront notifiés avec votre position.
               </p>
             </>
           )}
@@ -259,11 +259,11 @@ export default function SignalerPage() {
               </div>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <a
-                  href="tel:112"
+                  href="tel:118"
                   className="btn-accent"
                   style={{ padding: "14px 24px", textDecoration: "none" }}
                 >
-                  📞 Appeler le 112
+                  📞 Appeler le 118
                 </a>
                 <button
                   onClick={() => {

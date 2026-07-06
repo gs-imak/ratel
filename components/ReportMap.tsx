@@ -14,7 +14,8 @@ export default function ReportMap() {
         if (cancelled) return;
         const el = document.getElementById("ratel-map-report");
         if (!el || mapRef.current) return;
-        const home: [number, number] = [45.7589, 4.8472];
+        // Avenue de la Victoire, Kinshasa (client-supplied location)
+        const home: [number, number] = [-4.33876, 15.30725];
         const map = L.map(el, {
           zoomControl: true,
           attributionControl: false,

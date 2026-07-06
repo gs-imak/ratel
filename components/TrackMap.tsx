@@ -14,14 +14,15 @@ export default function TrackMap() {
         if (cancelled) return;
         const el = document.getElementById("ratel-map-track");
         if (!el || mapRef.current) return;
-        const depot: [number, number] = [45.7375, 4.82];
-        const home: [number, number] = [45.7589, 4.8472];
+        // Kinshasa route (client-supplied): Avenue de la Victoire → centre-ville
+        const depot: [number, number] = [-4.33876, 15.30725];
+        const home: [number, number] = [-4.30325, 15.31053];
         const route: [number, number][] = [
           depot,
-          [45.7402, 4.829],
-          [45.7461, 4.8331],
-          [45.751, 4.8398],
-          [45.7548, 4.8441],
+          [-4.332, 15.3078],
+          [-4.3245, 15.3084],
+          [-4.3165, 15.3094],
+          [-4.3095, 15.31],
           home,
         ];
         const map = L.map(el, { zoomControl: true, attributionControl: false, scrollWheelZoom: false });

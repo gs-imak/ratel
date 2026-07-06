@@ -91,15 +91,15 @@ export default function PaiementPage() {
               </label>
               <label className="lbl" style={{ gridColumn: "1 / -1" }}>
                 Adresse
-                <input className="fld" defaultValue="14 rue des Lilas" />
+                <input className="fld" defaultValue="12 avenue de la Victoire" />
               </label>
               <label className="lbl">
-                Code postal
-                <input className="fld" defaultValue="69003" />
+                Commune
+                <input className="fld" defaultValue="Kalamu" />
               </label>
               <label className="lbl">
                 Ville
-                <input className="fld" defaultValue="Lyon" />
+                <input className="fld" defaultValue="Kinshasa" />
               </label>
             </div>
           </div>
