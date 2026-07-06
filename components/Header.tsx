@@ -51,9 +51,15 @@ export default function Header() {
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
             <span
               className="display"
-              style={{ fontSize: 22, letterSpacing: "0.04em", textTransform: "uppercase", color: "var(--ink)" }}
+              style={{
+                fontSize: 22,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
+                color: "#e30613", // logo red (client: RATEL en rouge)
+                lineHeight: 1,
+              }}
             >
-              Ratel
+              <span style={{ fontSize: 30 }}>R</span>atel
             </span>
             <span
               style={{

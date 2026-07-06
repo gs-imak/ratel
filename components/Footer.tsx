@@ -38,9 +38,15 @@ export default function Footer() {
             </span>
             <span
               className="display"
-              style={{ fontSize: 21, letterSpacing: "0.04em", textTransform: "uppercase", color: "#fff" }}
+              style={{
+                fontSize: 21,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
+                color: "#e30613",
+                lineHeight: 1,
+              }}
             >
-              Ratel
+              <span style={{ fontSize: 28 }}>R</span>atel
             </span>
           </div>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, maxWidth: "22em" }}>
