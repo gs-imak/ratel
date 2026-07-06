@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "Extincteurs certifiés NF/CE livrés vite et bien, et une alerte géolocalisée qui prévient les secours en un seul geste. La vie n'a pas de prix.",
   metadataBase: new URL("https://ratel-self.vercel.app"),
   openGraph: {
-    title: "Ratel — Prévention & Sécurité incendie",
+    title: "Ratel — Prévention Sécurité Incendie",
     description:
       "Extincteurs certifiés et alerte géolocalisée. Protégez votre foyer, votre véhicule, votre entreprise.",
     type: "website",

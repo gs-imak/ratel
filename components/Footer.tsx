@@ -50,7 +50,7 @@ export default function Footer() {
             </span>
           </div>
           <p style={{ fontSize: 13.5, lineHeight: 1.6, maxWidth: "22em" }}>
-            La vie n’a pas de prix. Prévention et sécurité incendie — pour protéger ce qui compte.
+            La vie n’a pas de prix. Prévention Sécurité Incendie — pour protéger ce qui compte.
           </p>
         </div>
 
@@ -123,7 +123,7 @@ export default function Footer() {
             color: "rgba(255,255,255,.5)",
           }}
         >
-          <span>© 2026 Ratel — Prévention &amp; Sécurité incendie</span>
+          <span>© 2026 Ratel — Prévention Sécurité Incendie</span>
           <span>Paiement sécurisé · Mentions légales · CGV</span>
         </div>
       </div>
