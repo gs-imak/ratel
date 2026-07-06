@@ -52,6 +52,82 @@ export default function SecteursPage() {
         ))}
       </div>
 
+      {/* ---- Plan d'évacuation service ---- */}
+      <section style={{ marginTop: 56 }}>
+        <Eyebrow>Service clé — ERP &amp; locaux professionnels</Eyebrow>
+        <h2
+          className="display on-bg"
+          style={{ fontSize: "clamp(26px,3.4vw,40px)", color: "var(--ink)", marginBottom: 20, maxWidth: "24em" }}
+        >
+          Plan d’évacuation : conception, pose &amp; mise à jour
+        </h2>
+
+        <div className="card">
+          <div className="hazard" />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
+              gap: 32,
+              padding: "28px 28px 32px",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--muted)", marginBottom: 16 }}>
+                Affiché à chaque niveau du bâtiment, le plan d’évacuation est bien plus qu’une formalité : c’est le
+                repère qui permet à vos équipes et à votre public de retrouver en un coup d’œil{" "}
+                <strong style={{ color: "var(--ink)" }}>la sortie la plus proche</strong> et{" "}
+                <strong style={{ color: "var(--ink)" }}>le point de rassemblement</strong> en cas d’incendie.
+              </p>
+              <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--muted)", marginBottom: 16 }}>
+                Obligatoire dans la quasi-totalité des ERP et des locaux professionnels, il doit respecter la norme{" "}
+                <span className="badge-cert" style={{ fontSize: 12.5, padding: "3px 9px" }}>NF X 08-070</span> pour
+                avoir une réelle valeur réglementaire.
+              </p>
+              <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink)", fontWeight: 600 }}>
+                Ratel conçoit, imprime, pose et met à jour vos plans d’évacuation sur toute l’étendue de la ville de
+                Kinshasa et sur toute la République.
+              </p>
+            </div>
+
+            <div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 18 }}>
+                {[
+                  ["01", "Conception", "Relevé sur site et dessin conforme du plan"],
+                  ["02", "Impression", "Supports rigides, lisibles et durables"],
+                  ["03", "Pose", "Affichage à chaque niveau du bâtiment"],
+                  ["04", "Mise à jour", "Suivi des évolutions de vos locaux"],
+                ].map(([num, title, desc]) => (
+                  <div
+                    key={num}
+                    style={{
+                      border: "1px solid var(--line)",
+                      borderRadius: "var(--radius)",
+                      padding: "14px 16px",
+                      background: "var(--bg)",
+                    }}
+                  >
+                    <div className="display" style={{ fontWeight: 700, fontSize: 20, color: "var(--accent)" }}>
+                      {num}
+                    </div>
+                    <div style={{ fontWeight: 700, fontSize: 14.5, color: "var(--ink)", margin: "2px 0" }}>{title}</div>
+                    <div style={{ fontSize: 12.5, lineHeight: 1.45, color: "var(--muted)" }}>{desc}</div>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href="/devis"
+                className="btn-accent"
+                style={{ display: "block", textAlign: "center", padding: "15px 24px", fontSize: 15.5, textDecoration: "none" }}
+              >
+                Demander un devis plan d’évacuation →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* bottom CTA */}
       <div
         className="band-gold"

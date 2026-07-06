@@ -1,6 +1,6 @@
 const COLS = [
   { title: "Boutique", items: ["Extincteurs", "Détecteurs", "Couvertures anti-feu", "Entreprises & ERP"] },
-  { title: "Services", items: ["Alerte géolocalisée", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
+  { title: "Services", items: ["Alerte géolocalisée", "Plans d'évacuation NF X 08-070", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
 ];
 
 export default function Footer() {

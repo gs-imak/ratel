@@ -124,7 +124,7 @@ export default function DevisPage() {
             <textarea
               className="fld"
               rows={4}
-              placeholder="Type de site, surface, nombre d’extincteurs, échéance…"
+              placeholder="Type de site, surface, nombre d’extincteurs, plans d’évacuation, échéance…"
               style={{ resize: "vertical" }}
             />
           </label>
