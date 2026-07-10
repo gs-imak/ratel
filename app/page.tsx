@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
+import DemoVideo from "@/components/DemoVideo";
 import { featured, PASS_STEPS, TRUST, ALERT_POINTS } from "@/lib/products";
 
 const MAX = 1200;
@@ -192,7 +193,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <Eyebrow style={{ marginBottom: 12 }}>Animation — savoir réagir</Eyebrow>
+            <Eyebrow style={{ marginBottom: 12 }}>Réservé aux abonnés Ratalerte</Eyebrow>
             <h2 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", lineHeight: 1, color: "var(--ink)" }}>
               La méthode en 4 gestes
             </h2>
@@ -222,15 +223,7 @@ export default function HomePage() {
               minHeight: 240,
             }}
           >
-            <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9" }}>
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/Fm8bQ0bFG38?rel=0&modestbranding=1"
-                title="Comment utiliser un extincteur — méthode PASS"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, display: "block" }}
-              />
-            </div>
+            <DemoVideo />
           </div>
 
           <div style={{ padding: "36px 40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
