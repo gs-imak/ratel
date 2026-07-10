@@ -29,18 +29,19 @@ export default function HomePage() {
             >
               La vie n’a pas de prix.
             </h1>
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.6,
-                color: "rgba(255,255,255,.78)",
-                maxWidth: "30em",
-                marginBottom: 34,
-              }}
-            >
-              Des extincteurs certifiés, livrés vite et bien — et une alerte géolocalisée qui prévient les secours en
-              un seul geste. Protégez votre foyer, votre véhicule, votre entreprise.
-            </p>
+            <div style={{ fontSize: 17, lineHeight: 1.6, color: "rgba(255,255,255,.78)", maxWidth: "32em", marginBottom: 34 }}>
+              <p style={{ marginBottom: 12 }}>
+                Des extincteurs certifiés. Une livraison rapide et suivie en temps réel.
+              </p>
+              <p style={{ marginBottom: 12 }}>
+                <strong style={{ color: "#fff" }}>Ratalerte</strong>, réservée pour les abonnés Ratel : une alerte
+                géolocalisée en cas d’urgence réelle. Déclenchez l’alerte, votre position GPS sera transmise pour une
+                intervention rapide.
+              </p>
+              <p>
+                Protégez votre foyer, votre véhicule, votre moto, vos entreprises ainsi que vos bâtiments.
+              </p>
+            </div>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <Link
                 href="/boutique"
@@ -326,7 +327,7 @@ export default function HomePage() {
           }}
         >
           <div>
-            <Eyebrow tone="ink">Réservé aux abonnés Ratel</Eyebrow>
+            <Eyebrow tone="ink">Ratalerte — Réservé aux abonnés Ratel</Eyebrow>
             <h2
               className="display"
               style={{ fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", lineHeight: 1.02, marginBottom: 18 }}
@@ -344,8 +345,8 @@ export default function HomePage() {
                 marginBottom: 28,
               }}
             >
-              L’alerte Ratel transmet instantanément votre position GPS aux secours et à vos contacts de confiance.
-              Pendant ce temps, restez en sécurité.
+              Ratalerte transmet instantanément votre position GPS aux secours et à vos contacts de confiance pour une
+              intervention rapide. Pendant ce temps, restez en sécurité.
             </p>
             <Link
               href="/signaler"
