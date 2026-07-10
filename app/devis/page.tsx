@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
+import { Red } from "@/components/Brand";
 import { SECTORS } from "@/lib/products";
 
 export default function DevisPage() {
@@ -38,7 +39,7 @@ export default function DevisPage() {
             Demande envoyée
           </h1>
           <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, maxWidth: "36em", margin: "0 auto 8px" }}>
-            Merci. Un conseiller Ratel vous recontacte avec votre{" "}
+            Merci. Un conseiller <Red>Ratel</Red> vous recontacte avec votre{" "}
             <strong style={{ color: "var(--ink)" }}>devis gratuit sous 24 heures</strong>.
           </p>
           <p style={{ fontSize: 15, color: "var(--muted)", marginBottom: 28 }}>

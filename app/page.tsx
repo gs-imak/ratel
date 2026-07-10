@@ -2,6 +2,7 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
 import DemoVideo from "@/components/DemoVideo";
+import { Red, RedPill } from "@/components/Brand";
 import { featured, PASS_STEPS, TRUST, ALERT_POINTS } from "@/lib/products";
 
 const MAX = 1200;
@@ -35,7 +36,7 @@ export default function HomePage() {
                 Des extincteurs certifiés. Une livraison rapide et suivie en temps réel.
               </p>
               <p style={{ marginBottom: 12 }}>
-                <strong style={{ color: "#fff" }}>Ratalerte</strong>, réservée pour les abonnés Ratel : une alerte
+                <strong style={{ color: "#fff" }}>Ratalerte</strong>, réservée pour les abonnés <Red>Ratel</Red> : une alerte
                 géolocalisée en cas d’urgence réelle. Déclenchez l’alerte, votre position GPS sera transmise pour une
                 intervention rapide.
               </p>
@@ -193,7 +194,9 @@ export default function HomePage() {
           }}
         >
           <div>
-            <Eyebrow style={{ marginBottom: 12 }}>Réservé aux abonnés Ratalerte</Eyebrow>
+            <Eyebrow style={{ marginBottom: 12 }}>
+              Réservé aux <RedPill>abonnés Ratalerte</RedPill>
+            </Eyebrow>
             <h2 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", lineHeight: 1, color: "var(--ink)" }}>
               La méthode en 4 gestes
             </h2>
@@ -320,7 +323,9 @@ export default function HomePage() {
           }}
         >
           <div>
-            <Eyebrow tone="ink">Ratalerte — Réservé aux abonnés Ratel</Eyebrow>
+            <Eyebrow tone="ink">
+              Ratalerte — Réservé aux abonnés <Red>Ratel</Red>
+            </Eyebrow>
             <h2
               className="display"
               style={{ fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", lineHeight: 1.02, marginBottom: 18 }}

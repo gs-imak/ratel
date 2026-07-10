@@ -1,3 +1,5 @@
+import { Red } from "@/components/Brand";
+
 const COLS = [
   { title: "Boutique", items: ["Extincteurs", "Détecteurs", "Couvertures anti-feu", "Entreprises & ERP"] },
   { title: "Services", items: ["Alerte géolocalisée", "Plans d'évacuation NF X 08-070", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
@@ -123,7 +125,9 @@ export default function Footer() {
             color: "rgba(255,255,255,.5)",
           }}
         >
-          <span>© 2026 Ratel — Prévention Sécurité Incendie</span>
+          <span>
+            © 2026 <Red>Ratel</Red> — Prévention Sécurité Incendie
+          </span>
           <span>Paiement sécurisé · Mentions légales · CGV</span>
         </div>
       </div>

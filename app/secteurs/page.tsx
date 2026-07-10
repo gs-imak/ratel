@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
+import { Red } from "@/components/Brand";
 import { SECTORS } from "@/lib/products";
 
 export default function SecteursPage() {
@@ -86,8 +87,8 @@ export default function SecteursPage() {
                 avoir une réelle valeur réglementaire.
               </p>
               <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink)", fontWeight: 600 }}>
-                Ratel conçoit, imprime, pose et met à jour vos plans d’évacuation sur toute l’étendue de la ville de
-                Kinshasa et sur toute la République.
+                <Red>Ratel</Red> conçoit, imprime, pose et met à jour vos plans d’évacuation sur toute l’étendue de la
+                ville de Kinshasa et sur toute la République.
               </p>
             </div>
 

@@ -1,5 +1,6 @@
 import TrackMap from "@/components/TrackMap";
 import Eyebrow from "@/components/Eyebrow";
+import { Red } from "@/components/Brand";
 import { TIMELINE } from "@/lib/products";
 
 export default function SuiviPage() {
@@ -79,7 +80,10 @@ export default function SuiviPage() {
                 boxShadow: "0 2px 8px rgba(0,0,0,.15)",
               }}
             >
-              <strong>Yanis · livreur Ratel</strong> · à 2,3 km
+              <strong>
+                Yanis · livreur <Red>Ratel</Red>
+              </strong>{" "}
+              · à 2,3 km
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Red } from "@/components/Brand";
 
 /* PASS-method video, reserved for Ratalerte subscribers (client request).
    Demo gate: no real auth on this site yet — "Je suis abonné" unlocks locally. */
@@ -60,7 +61,7 @@ export default function DemoVideo() {
           className="display"
           style={{ color: "#fff", fontSize: 20, textTransform: "uppercase", letterSpacing: "0.03em" }}
         >
-          Vidéo réservée aux abonnés Ratalerte
+          Vidéo réservée aux <Red>abonnés Ratalerte</Red>
         </div>
         <p style={{ color: "rgba(255,255,255,.7)", fontSize: 13.5, marginTop: 6, maxWidth: "34em" }}>
           La démonstration complète de la méthode P.A.S.S est accessible avec votre abonnement Ratalerte.
