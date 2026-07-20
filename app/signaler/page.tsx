@@ -30,7 +30,7 @@ export default function SignalerPage() {
         Signaler un incendie
       </h1>
       <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 30 }}>
-        En cas d’urgence réelle, déclenchez l’alerte. Votre position GPS sera transmise aux secours (118) et à vos
+        En cas d’urgence réelle, déclenchez l’alerte. Votre position GPS sera transmise aux secours et à vos
         contacts de confiance.
       </p>
 
@@ -200,7 +200,7 @@ export default function SignalerPage() {
                 Envoyer l’alerte aux secours
               </button>
               <p style={{ textAlign: "center", fontSize: 12.5, color: "var(--muted)", marginTop: 12 }}>
-                Les services d’urgence (118) et vos contacts seront notifiés avec votre position.
+                Les secours et vos contacts seront notifiés avec votre position.
               </p>
             </>
           )}
@@ -258,13 +258,27 @@ export default function SignalerPage() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                <a
-                  href="tel:118"
-                  className="btn-accent"
-                  style={{ padding: "14px 24px", textDecoration: "none" }}
+                {/* No one-tap dial until Ratel's own emergency line is allocated.
+                    "118" was previously published here: it is the Congo-BRAZZAVILLE fire
+                    number, not a DRC one (the DRC numbering plan assigns it to nobody, and
+                    the Kinshasa brigade's commander publicly gives a mobile line instead).
+                    A button that dials nothing during a fire is worse than no button. */}
+                <span
+                  style={{
+                    padding: "14px 20px",
+                    border: "1px solid var(--line)",
+                    borderRadius: "var(--radius)",
+                    background: "var(--bg)",
+                    fontSize: 13.5,
+                    lineHeight: 1.5,
+                    color: "var(--muted)",
+                    maxWidth: "34em",
+                    textAlign: "left",
+                  }}
                 >
-                  📞 Appeler le 118
-                </a>
+                  Le numéro d’urgence <strong style={{ color: "var(--ink)" }}>Ratel</strong> est en cours
+                  d’attribution. Il s’affichera ici, appelable en un geste, dès qu’il sera confirmé.
+                </span>
                 <button
                   onClick={() => {
                     setStage("idle");

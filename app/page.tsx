@@ -274,7 +274,7 @@ export default function HomePage() {
             ))}
             <p className="warn" style={{ fontSize: 13, color: "var(--muted)", marginTop: 16, lineHeight: 1.5 }}>
               En cas de doute ou de fumée importante, n’insistez pas :{" "}
-              <strong style={{ color: "var(--ink)" }}>évacuez et appelez les pompiers (118)</strong>.
+              <strong style={{ color: "var(--ink)" }}>évacuez immédiatement et alertez les secours</strong>.
             </p>
           </div>
         </div>
