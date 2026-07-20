@@ -100,6 +100,7 @@ export const TRUST = [
 export type Sector = { id: string; label: string; icon: string; desc: string };
 
 export const SECTORS: Sector[] = [
+  { id: "entreprise", label: "Entreprise", icon: "🏭", desc: "Bureaux, ateliers et entrepôts : équipement complet, signalétique et plan d’évacuation adaptés à votre activité." },
   { id: "aeroport", label: "Aéroport", icon: "✈️", desc: "Zones à forte affluence et risques électriques : extincteurs CO₂, signalétique et couverture ERP conformes." },
   { id: "hopitaux", label: "Hôpitaux", icon: "🏥", desc: "Établissements de santé : équipements adaptés aux locaux sensibles et aux circulations d’évacuation." },
   { id: "station-service", label: "Station-service", icon: "⛽", desc: "Liquides inflammables : extincteurs poudre et mousse, contrôle réglementaire périodique." },
