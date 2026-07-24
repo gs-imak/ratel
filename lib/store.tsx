@@ -98,8 +98,8 @@ export function Providers({ children }: { children: ReactNode }) {
       totalLabel: fmt(total),
       shipNote:
         subtotal >= FREE_SHIPPING_THRESHOLD
-          ? "Livraison offerte dès 79 € — acquise."
-          : "Livraison offerte dès 79 € d’achat.",
+          ? `Livraison offerte dès ${fmt(FREE_SHIPPING_THRESHOLD)} — acquise.`
+          : `Livraison offerte dès ${fmt(FREE_SHIPPING_THRESHOLD)} d’achat.`,
       add,
       changeQty,
       remove,

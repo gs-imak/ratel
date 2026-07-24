@@ -39,21 +39,47 @@ const PRODUCT_GALLERY: Record<string, string[]> = {
   ],
 };
 
-/** Format a number as French currency: 24,90 € (with non-breaking space). */
+/**
+ * Format a price in Congolese francs: 125 000 FC.
+ *
+ * Prices are displayed in CDF ONLY. Arrete ministeriel
+ * n. 007/CAB/VPM/MINECONAT/DMS/AKM/2025 (art. 6 bis) requires every economic
+ * actor, explicitly including "plateformes en ligne", to display prices
+ * exclusively in francs congolais, and prohibits announcing a price in a
+ * foreign currency "sous n'importe quelle forme" — which also rules out
+ * showing a USD figure alongside. Settling a transaction in another currency
+ * stays legal; only the display is constrained.
+ *
+ * Amounts are integers: CDF is not used with decimals in practice, and the
+ * M-Pesa rail rejects fractional amounts outright.
+ *
+ * Grouping is done by hand rather than with toLocaleString so the server and
+ * the browser always emit the same string (differing ICU data would break
+ * hydration). Non-breaking spaces keep an amount from wrapping mid-number.
+ */
 export function fmt(n: number): string {
-  return n.toFixed(2).replace(".", ",") + " €";
+  const grouped = Math.round(n)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return `${grouped} FC`;
 }
 
+/* PROVISIONAL PRICING. Every product, photo and price on the site is a
+   placeholder: the client is sourcing the real catalogue from his supplier in
+   China and will set final CDF prices with his accountant once the goods land.
+   These figures were carried over from the original design and restated in
+   round francs so the site is legal to publish in the meantime — they are not
+   quotes. Replace the `price` values here and the whole site follows. */
 const RAW: Omit<Product, "priceLabel" | "kind" | "img">[] = [
-  { id: "p1", name: "Extincteur Poudre ABC 1 kg", type: "Poudre ABC", classes: "A B C", cap: "1 kg", price: 24.9, cat: "voiture", tag: "Voiture & 2 roues", blurb: "Compact, idéal pour la boîte à gants ou le coffre. Polyvalent : feux de solides, de liquides et de gaz." },
-  { id: "p2", name: "Extincteur Poudre ABC 6 kg", type: "Poudre ABC", classes: "A B C", cap: "6 kg", price: 49.9, cat: "maison", tag: "Maison & garage", blurb: "La référence polyvalente pour la maison. Couvre la grande majorité des départs de feu domestiques." },
-  { id: "p3", name: "Extincteur CO₂ 2 kg", type: "CO₂", classes: "B", cap: "2 kg", price: 64.9, cat: "cuisine", tag: "Électrique & cuisine", blurb: "N’endommage pas les appareils. Parfait pour les tableaux électriques et les équipements sous tension." },
-  { id: "p4", name: "Extincteur Eau pulvérisée 6 L", type: "Eau + additif", classes: "A B", cap: "6 L", price: 54.9, cat: "maison", tag: "Bureau & habitation", blurb: "Refroidit et étouffe les feux de matériaux solides, sans résidu de poudre." },
-  { id: "p5", name: "Extincteur Mousse 6 L", type: "Mousse", classes: "A B", cap: "6 L", price: 59.9, cat: "entreprise", tag: "Entreprise & ERP", blurb: "Haute efficacité sur les liquides inflammables. Conforme aux exigences des établissements recevant du public." },
-  { id: "p6", name: "Couverture anti-feu 1,2 m", type: "Couverture", classes: "F", cap: "1,2 m", price: 18.9, cat: "cuisine", tag: "Cuisine", blurb: "Étouffe instantanément un feu de friture ou de poêle. Un geste simple, une vie sauvée." },
-  { id: "p7", name: "Détecteur de fumée NF", type: "DAAF", classes: "—", cap: "pile 10 ans", price: 12.9, cat: "maison", tag: "Maison", blurb: "Détecteur autonome certifié NF, pile longue durée. Obligatoire dans chaque logement." },
-  { id: "p8", name: "Extincteur Poudre ABC 2 kg", type: "Poudre ABC", classes: "A B C", cap: "2 kg", price: 32.9, cat: "voiture", tag: "Voiture", blurb: "Le bon compromis encombrement / autonomie pour la voiture familiale." },
-  { id: "p9", name: "Extincteur compact multi-usages 500 ml", type: "Spray extincteur", classes: "A B F", cap: "500 ml", price: 29.9, cat: "maison", tag: "Multi-usages", blurb: "Le spray compact à garder partout : maison, voiture, camping, bateau. Support mural inclus, prêt à l’emploi en un geste — idéal pour les petits départs de feu." },
+  { id: "p1", name: "Extincteur Poudre ABC 1 kg", type: "Poudre ABC", classes: "A B C", cap: "1 kg", price: 62000, cat: "voiture", tag: "Voiture & 2 roues", blurb: "Compact, idéal pour la boîte à gants ou le coffre. Polyvalent : feux de solides, de liquides et de gaz." },
+  { id: "p2", name: "Extincteur Poudre ABC 6 kg", type: "Poudre ABC", classes: "A B C", cap: "6 kg", price: 125000, cat: "maison", tag: "Maison & garage", blurb: "La référence polyvalente pour la maison. Couvre la grande majorité des départs de feu domestiques." },
+  { id: "p3", name: "Extincteur CO₂ 2 kg", type: "CO₂", classes: "B", cap: "2 kg", price: 160000, cat: "cuisine", tag: "Électrique & cuisine", blurb: "N’endommage pas les appareils. Parfait pour les tableaux électriques et les équipements sous tension." },
+  { id: "p4", name: "Extincteur Eau pulvérisée 6 L", type: "Eau + additif", classes: "A B", cap: "6 L", price: 135000, cat: "maison", tag: "Bureau & habitation", blurb: "Refroidit et étouffe les feux de matériaux solides, sans résidu de poudre." },
+  { id: "p5", name: "Extincteur Mousse 6 L", type: "Mousse", classes: "A B", cap: "6 L", price: 150000, cat: "entreprise", tag: "Entreprise & ERP", blurb: "Haute efficacité sur les liquides inflammables. Conforme aux exigences des établissements recevant du public." },
+  { id: "p6", name: "Couverture anti-feu 1,2 m", type: "Couverture", classes: "F", cap: "1,2 m", price: 47000, cat: "cuisine", tag: "Cuisine", blurb: "Étouffe instantanément un feu de friture ou de poêle. Un geste simple, une vie sauvée." },
+  { id: "p7", name: "Détecteur de fumée NF", type: "DAAF", classes: "—", cap: "pile 10 ans", price: 32000, cat: "maison", tag: "Maison", blurb: "Détecteur autonome certifié NF, pile longue durée. Obligatoire dans chaque logement." },
+  { id: "p8", name: "Extincteur Poudre ABC 2 kg", type: "Poudre ABC", classes: "A B C", cap: "2 kg", price: 82000, cat: "voiture", tag: "Voiture", blurb: "Le bon compromis encombrement / autonomie pour la voiture familiale." },
+  { id: "p9", name: "Extincteur compact multi-usages 500 ml", type: "Spray extincteur", classes: "A B F", cap: "500 ml", price: 75000, cat: "maison", tag: "Multi-usages", blurb: "Le spray compact à garder partout : maison, voiture, camping, bateau. Support mural inclus, prêt à l’emploi en un geste — idéal pour les petits départs de feu." },
 ];
 
 function kindOf(p: { id: string }): Product["kind"] {
@@ -130,6 +156,48 @@ export const TIMELINE = [
   { title: "Livré", time: "Estimé · 17:42", state: "todo" as const },
 ];
 
-/** Shipping is free over this threshold (in €). */
-export const FREE_SHIPPING_THRESHOLD = 79;
-export const SHIPPING_FLAT = 5.9;
+/* ------------------------- Formation (client copy) -------------------------
+   Wording supplied by the client on 2026-07-19; kept close to his own text.
+   Intervention windows: 48h across Kinshasa, 96h across the rest of the DRC. */
+
+export const FORMATION_DELAIS = [
+  { big: "48H", small: "Ville province de Kinshasa" },
+  { big: "96H", small: "Sur toute la République" },
+];
+
+export const FORMATION_PROGRAMME = [
+  {
+    num: "01",
+    title: "Manipulation des extincteurs",
+    desc: "Les participants sont formés pour utiliser efficacement les extincteurs dans des environnements complexes et fréquentés, afin d’obtenir une réponse rapide et sécurisée en cas de départ de feu.",
+  },
+  {
+    num: "02",
+    title: "Normes et réglementation ERP",
+    desc: "Nous mettons l’accent sur la réglementation incendie applicable aux ERP, pour que votre personnel soit non seulement préparé, mais aussi informé des obligations légales propres à votre établissement.",
+  },
+  {
+    num: "03",
+    title: "Exercices en conditions réelles",
+    desc: "Nos formateurs conduisent des exercices pratiques dans vos locaux, en simulant des scénarios réalistes pour tester et ancrer les compétences acquises pendant la formation.",
+  },
+];
+
+export const FORMATION_POINTS = [
+  {
+    title: "Directement dans vos locaux",
+    desc: "Pas besoin de déplacer vos collaborateurs. Nous intervenons dans votre environnement de travail réel, là où vos équipes évoluent au quotidien.",
+  },
+  {
+    title: "Organisée sous 48h",
+    desc: "Nous sommes en capacité de réaliser votre formation sous 48h partout dans la ville province de Kinshasa, et sous 96h sur toute l’étendue de la République.",
+  },
+  {
+    title: "Toutes tailles de groupes",
+    desc: "De la session pour une petite équipe aux groupes plus importants, avec une attention personnalisée à chaque participant.",
+  },
+];
+
+/** Shipping is free above this basket total (in CDF). */
+export const FREE_SHIPPING_THRESHOLD = 200000;
+export const SHIPPING_FLAT = 15000;

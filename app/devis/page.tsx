@@ -8,11 +8,20 @@ import { SECTORS } from "@/lib/products";
 
 export default function DevisPage() {
   const [secteur, setSecteur] = useState("");
+  const [besoin, setBesoin] = useState("");
   const [sent, setSent] = useState(false);
+  /* Booking a training session goes through this same form — the client asked
+     that it be reached "exactement comme pour demander un devis". */
+  const [isFormation, setIsFormation] = useState(false);
 
   useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get("secteur");
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("secteur");
     if (q && SECTORS.some((s) => s.id === q)) setSecteur(q);
+    if (params.get("objet") === "formation") {
+      setIsFormation(true);
+      setBesoin("Formation incendie sur site — ");
+    }
   }, []);
 
   if (sent) {
@@ -39,8 +48,17 @@ export default function DevisPage() {
             Demande envoyée
           </h1>
           <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, maxWidth: "36em", margin: "0 auto 8px" }}>
-            Merci. Un conseiller <Red>Ratel</Red> vous recontacte avec votre{" "}
-            <strong style={{ color: "var(--ink)" }}>devis gratuit sous 24 heures</strong>.
+            {isFormation ? (
+              <>
+                Merci. Un formateur <Red>Ratel</Red> vous rappelle pour caler la date de votre{" "}
+                <strong style={{ color: "var(--ink)" }}>formation sur site</strong>.
+              </>
+            ) : (
+              <>
+                Merci. Un conseiller <Red>Ratel</Red> vous recontacte avec votre{" "}
+                <strong style={{ color: "var(--ink)" }}>devis gratuit sous 24 heures</strong>.
+              </>
+            )}
           </p>
           <p style={{ fontSize: 15, color: "var(--muted)", marginBottom: 28 }}>
             Référence <strong style={{ color: "var(--ink)" }}>#DV-4096</strong>
@@ -59,9 +77,9 @@ export default function DevisPage() {
 
   return (
     <main style={{ maxWidth: 720, margin: "0 auto", padding: "48px 24px 90px" }}>
-      <Eyebrow>Étude &amp; devis gratuits</Eyebrow>
+      <Eyebrow>{isFormation ? "Session de formation" : "Étude & devis gratuits"}</Eyebrow>
       <h1 className="display on-bg" style={{ fontSize: "clamp(32px,4.5vw,50px)", color: "var(--ink)", marginBottom: 12 }}>
-        Demandez votre devis gratuitement
+        {isFormation ? "Réservez votre session de formation" : "Demandez votre devis gratuitement"}
       </h1>
 
       {/* yellow highlight strip */}
@@ -79,12 +97,13 @@ export default function DevisPage() {
           marginBottom: 26,
         }}
       >
-        ⚡ Devis gratuit en moins de 24H
+        {isFormation ? "⚡ Formation sur site sous 48H à Kinshasa" : "⚡ Devis gratuit en moins de 24H"}
       </div>
 
       <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, marginBottom: 30 }}>
-        Décrivez votre besoin en quelques mots. Un conseiller vous répond avec une étude et un tarif adaptés à votre
-        site, sans engagement.
+        {isFormation
+          ? "Indiquez votre site et le nombre de participants. Notre équipe vous rappelle pour caler la date, sous 48h dans la ville province de Kinshasa et sous 96h sur toute la République. Devis gratuit."
+          : "Décrivez votre besoin en quelques mots. Un conseiller vous répond avec une étude et un tarif adaptés à votre site, sans engagement."}
       </p>
 
       <form
@@ -125,14 +144,20 @@ export default function DevisPage() {
             <textarea
               className="fld"
               rows={4}
-              placeholder="Type de site, surface, nombre d’extincteurs, plans d’évacuation, échéance…"
+              value={besoin}
+              onChange={(e) => setBesoin(e.target.value)}
+              placeholder={
+                isFormation
+                  ? "Nombre de participants, adresse du site, dates qui vous arrangent…"
+                  : "Type de site, surface, nombre d’extincteurs, plans d’évacuation, échéance…"
+              }
               style={{ resize: "vertical" }}
             />
           </label>
         </div>
 
         <button className="btn-accent" type="submit" style={{ padding: "16px 24px", fontSize: 16.5 }}>
-          Oui — je souhaite un devis
+          {isFormation ? "Réserver ma session de formation" : "Oui — je souhaite un devis"}
         </button>
         <p style={{ fontSize: 12.5, color: "var(--muted)", textAlign: "center" }}>
           🔒 Vos informations restent confidentielles. Aucun engagement.

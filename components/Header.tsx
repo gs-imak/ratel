@@ -8,6 +8,7 @@ const NAV = [
   { href: "/", label: "Accueil", match: (p: string) => p === "/" },
   { href: "/boutique", label: "Boutique", match: (p: string) => p.startsWith("/boutique") || p.startsWith("/produit") },
   { href: "/secteurs", label: "Secteurs", match: (p: string) => p.startsWith("/secteurs") },
+  { href: "/formation", label: "Formation", match: (p: string) => p.startsWith("/formation") },
   { href: "/#demo", label: "Démo", match: () => false },
   { href: "/signaler", label: "Signaler", match: (p: string) => p.startsWith("/signaler") },
   { href: "/suivi", label: "Suivi", match: (p: string) => p.startsWith("/suivi") },
