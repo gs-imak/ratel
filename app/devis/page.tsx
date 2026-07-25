@@ -53,8 +53,9 @@ export default function DevisPage() {
           <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, maxWidth: "36em", margin: "0 auto 8px" }}>
             {isFormation ? (
               <>
-                Merci. Un formateur <Red>Ratel</Red> vous rappelle pour caler la date de votre{" "}
-                <strong style={{ color: "var(--ink)" }}>formation sur site</strong>.
+                Merci. Un formateur <Red>Ratel</Red> vous rappelle pour confirmer votre{" "}
+                <strong style={{ color: "var(--ink)" }}>formation sur site</strong>, sous 48h à Kinshasa et sous
+                96h sur toute la République.
               </>
             ) : (
               <>
