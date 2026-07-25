@@ -125,11 +125,11 @@ export default function DevisPage() {
           </label>
           <label className="lbl">
             Téléphone
-            <input className="fld" type="tel" placeholder="06 12 34 56 78" />
+            <input className="fld" type="tel" placeholder="0999 000 000" />
           </label>
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
             Email
-            <input className="fld" type="email" required placeholder="vous@exemple.fr" />
+            <input className="fld" type="email" required placeholder="vous@exemple.cd" />
           </label>
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
             Secteur
