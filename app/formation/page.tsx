@@ -130,7 +130,10 @@ export default function FormationPage() {
                 48H
               </span>
               <span style={{ fontSize: 15, lineHeight: 1.5, color: "rgba(255,255,255,.82)", maxWidth: "18em" }}>
-                Notre équipe vous rappelle pour caler la date et le nombre de participants.
+                {/* Client's wording, minus "ci-dessus": the 48H/96H badges sit above this
+                    panel on mobile but beside it on desktop, so the pointer would be wrong
+                    on half the viewports. */}
+                Notre équipe vous rappelle dans le délai indiqué.
               </span>
             </div>
           )}

@@ -183,6 +183,17 @@ export const FORMATION_PROGRAMME = [
   },
 ];
 
+/* Options for the "genre de formation souhaité" field on the booking form.
+   Derived from the programme above, plus a full-session option — the client
+   asked for the field without naming the choices, so these follow his own
+   module titles and should be confirmed with him. */
+export const FORMATION_TYPES = [
+  { id: "complete", label: "Formation complète (les 3 modules)" },
+  { id: "manipulation", label: "Manipulation des extincteurs" },
+  { id: "erp", label: "Normes et réglementation ERP" },
+  { id: "exercices", label: "Exercices en conditions réelles" },
+];
+
 export const FORMATION_POINTS = [
   {
     title: "Directement dans vos locaux",

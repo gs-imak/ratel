@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import { Red } from "@/components/Brand";
-import { SECTORS } from "@/lib/products";
+import { FORMATION_TYPES, SECTORS } from "@/lib/products";
 
 export default function DevisPage() {
   const [secteur, setSecteur] = useState("");
   const [besoin, setBesoin] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [genre, setGenre] = useState("");
+  const [dateSouhaitee, setDateSouhaitee] = useState("");
   const [sent, setSent] = useState(false);
   /* Booking a training session goes through this same form — the client asked
      that it be reached "exactement comme pour demander un devis". */
@@ -102,7 +105,7 @@ export default function DevisPage() {
 
       <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, marginBottom: 30 }}>
         {isFormation
-          ? "Indiquez votre site et le nombre de participants. Notre équipe vous rappelle pour caler la date, sous 48h dans la ville province de Kinshasa et sous 96h sur toute la République. Devis gratuit."
+          ? "Indiquez votre adresse, le genre de formation et la date souhaitée. Notre équipe vous rappelle sous 48h dans la ville province de Kinshasa, et sous 96h sur toute la République. Devis gratuit."
           : "Décrivez votre besoin en quelques mots. Un conseiller vous répond avec une étude et un tarif adaptés à votre site, sans engagement."}
       </p>
 
@@ -139,6 +142,40 @@ export default function DevisPage() {
               <option value="autre">Autre</option>
             </select>
           </label>
+          {isFormation && (
+            <>
+              <label className="lbl" style={{ gridColumn: "1 / -1" }}>
+                Adresse complète
+                <input
+                  className="fld"
+                  required
+                  value={adresse}
+                  onChange={(e) => setAdresse(e.target.value)}
+                  placeholder="Avenue, numéro, commune, ville"
+                />
+              </label>
+              <label className="lbl">
+                Genre de formation souhaité
+                <select className="fld" value={genre} onChange={(e) => setGenre(e.target.value)}>
+                  <option value="">— Sélectionnez —</option>
+                  {FORMATION_TYPES.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="lbl">
+                Date souhaitée
+                <input
+                  className="fld"
+                  type="date"
+                  value={dateSouhaitee}
+                  onChange={(e) => setDateSouhaitee(e.target.value)}
+                />
+              </label>
+            </>
+          )}
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
             Votre besoin
             <textarea
@@ -148,7 +185,7 @@ export default function DevisPage() {
               onChange={(e) => setBesoin(e.target.value)}
               placeholder={
                 isFormation
-                  ? "Nombre de participants, adresse du site, dates qui vous arrangent…"
+                  ? "Nombre de participants, type de locaux, précisions utiles…"
                   : "Type de site, surface, nombre d’extincteurs, plans d’évacuation, échéance…"
               }
               style={{ resize: "vertical" }}
