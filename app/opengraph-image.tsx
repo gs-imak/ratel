@@ -53,16 +53,16 @@ export default function Image() {
         <div
           style={{
             display: "flex",
-            fontSize: 120,
+            fontSize: 96,
             fontWeight: 800,
-            lineHeight: 1,
+            lineHeight: 1.05,
             letterSpacing: -2,
-            marginBottom: 20,
+            marginBottom: 26,
           }}
         >
           La vie n’a pas de prix.
         </div>
-        <div style={{ display: "flex", fontSize: 40, color: "rgba(255,255,255,.9)", marginBottom: 46 }}>
+        <div style={{ display: "flex", fontSize: 36, color: "rgba(255,255,255,.9)", marginBottom: 52 }}>
           Extincteurs certifiés, formation et alerte géolocalisée.
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
