@@ -34,10 +34,14 @@ type CartCtx = {
   add: (id: string) => void;
   changeQty: (id: string, delta: number) => void;
   remove: (id: string) => void;
+  clear: () => void;
 };
 const CartContext = createContext<CartCtx | null>(null);
 
-const INITIAL_CART: CartState = { p2: 1, p7: 2 };
+/* Empty. A seeded cart would put products in a first-time visitor's basket that
+   they never chose, and the header would read "Panier 3" before they clicked
+   anything. */
+const INITIAL_CART: CartState = {};
 
 export function Providers({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartState>(INITIAL_CART);
@@ -75,13 +79,24 @@ export function Providers({ children }: { children: ReactNode }) {
       return next;
     });
 
+  const clear = () => setCart({});
+
   const value = useMemo<CartCtx>(() => {
+    /* Resolve ids defensively. The cart is restored from localStorage, so it can
+       hold an id that no longer exists in the catalogue — which is exactly what
+       happens the day the real product list replaces the placeholder one. Casting
+       the lookup to Product and reading .price off undefined would throw inside a
+       provider that wraps every route, permanently breaking the whole site for
+       that visitor until they cleared their browser storage. Unknown ids are
+       dropped instead. */
     const items: CartLine[] = Object.keys(cart)
       .filter((id) => cart[id] > 0)
       .map((id) => {
-        const p = productById(id) as Product;
+        const p = productById(id);
+        if (!p) return null;
         return { ...p, qty: cart[id], lineLabel: fmt(p.price * cart[id]) };
-      });
+      })
+      .filter((line): line is CartLine => line !== null);
     const subtotal = items.reduce((a, i) => a + i.price * i.qty, 0);
     const shipping =
       items.length === 0 ? 0 : subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FLAT;
@@ -103,6 +118,7 @@ export function Providers({ children }: { children: ReactNode }) {
       add,
       changeQty,
       remove,
+      clear,
     };
   }, [cart]);
 

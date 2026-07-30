@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import TrackMap from "@/components/TrackMap";
 import Eyebrow from "@/components/Eyebrow";
 import { Red } from "@/components/Brand";
 import { TIMELINE } from "@/lib/products";
+
+export const metadata: Metadata = {
+  title: "Suivi de livraison",
+  description: "Suivez votre commande Ratel en temps réel jusqu’à votre porte.",
+};
 
 export default function SuiviPage() {
   return (
@@ -22,7 +28,7 @@ export default function SuiviPage() {
             Suivi de livraison
           </h1>
           <p className="on-bg-soft" style={{ fontSize: 15, color: "var(--muted)", marginTop: 8 }}>
-            Commande <strong style={{ color: "#fff" }}>#RTL-2048</strong> · livreur en route
+            Exemple de suivi · livreur en route
           </p>
         </div>
         <div style={{ textAlign: "right" }}>
@@ -81,7 +87,7 @@ export default function SuiviPage() {
               }}
             >
               <strong>
-                Yanis · livreur <Red>Ratel</Red>
+                Votre livreur <Red>Ratel</Red>
               </strong>{" "}
               · à 2,3 km
             </div>
@@ -136,21 +142,12 @@ export default function SuiviPage() {
               </div>
             );
           })}
-          <button
-            style={{
-              width: "100%",
-              marginTop: 6,
-              padding: 13,
-              background: "transparent",
-              color: "var(--ink)",
-              border: "1px solid var(--line)",
-              borderRadius: "var(--radius)",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-          >
-            Contacter le livreur
-          </button>
+          {/* "Contacter le livreur" was a button that did nothing when pressed. It comes
+              back as a real action once the client gives us the customer-service line. */}
+          <p style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.5, marginTop: 10 }}>
+            Un aperçu du suivi que recevront vos commandes. Le suivi réel et le contact du livreur seront activés
+            avec le lancement des livraisons.
+          </p>
         </div>
       </div>
     </main>

@@ -1,8 +1,30 @@
+import Link from "next/link";
 import { Red } from "@/components/Brand";
 
-const COLS = [
-  { title: "Boutique", items: ["Extincteurs", "Détecteurs", "Couvertures anti-feu", "Entreprises & ERP"] },
-  { title: "Services", items: ["Alerte géolocalisée", "Formation incendie sur site", "Plans d'évacuation NF X 08-070", "Suivi de livraison", "Conseil & diagnostic", "Maintenance"] },
+/* Every entry points at a route that exists. These used to be plain <span>s, so the
+   footer looked like navigation but nothing in it was clickable. */
+const COLS: { title: string; items: { label: string; href: string }[] }[] = [
+  {
+    title: "Boutique",
+    items: [
+      { label: "Tous les produits", href: "/boutique" },
+      { label: "Maison", href: "/boutique?cat=maison" },
+      { label: "Voiture", href: "/boutique?cat=voiture" },
+      { label: "Cuisine", href: "/boutique?cat=cuisine" },
+      { label: "Entreprise & ERP", href: "/boutique?cat=entreprise" },
+    ],
+  },
+  {
+    title: "Services",
+    items: [
+      { label: "Ratalerte, alerte géolocalisée", href: "/signaler" },
+      { label: "Formation incendie sur site", href: "/formation" },
+      { label: "Plans d'évacuation", href: "/secteurs" },
+      { label: "Solutions par secteur", href: "/secteurs" },
+      { label: "Suivi de livraison", href: "/suivi" },
+      { label: "Devis gratuit", href: "/devis" },
+    ],
+  },
 ];
 
 export default function Footer() {
@@ -72,7 +94,13 @@ export default function Footer() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 9, fontSize: 14 }}>
               {col.items.map((i) => (
-                <span key={i}>{i}</span>
+                <Link
+                  key={i.label}
+                  href={i.href}
+                  style={{ color: "rgba(255,255,255,.7)", textDecoration: "none" }}
+                >
+                  {i.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -128,7 +156,10 @@ export default function Footer() {
           <span>
             © 2026 <Red>Ratel</Red> — Prévention Sécurité Incendie
           </span>
-          <span>Paiement sécurisé · Mentions légales · CGV</span>
+          {/* "Mentions légales · CGV" was printed here as inert text with no pages behind
+              it. The client's legal adviser is drafting the contracts; link these once the
+              real pages exist rather than implying they are already available. */}
+          <span>Paiement par mobile money</span>
         </div>
       </div>
     </footer>

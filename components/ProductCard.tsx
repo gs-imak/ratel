@@ -52,8 +52,12 @@ export default function ProductCard({
         >
           {product.tag}
         </span>
-        <h3 style={{ fontSize: variant === "featured" ? 18 : 17, fontWeight: 700, color: "var(--ink)", lineHeight: 1.2 }}>
-          {product.name}
+        {/* The title links too. Previously only the photo navigated, which is a small
+            target and invisible to anyone tabbing through the catalogue. */}
+        <h3 style={{ fontSize: variant === "featured" ? 18 : 17, fontWeight: 700, lineHeight: 1.2 }}>
+          <Link href={`/produit/${product.id}`} style={{ color: "var(--ink)", textDecoration: "none" }}>
+            {product.name}
+          </Link>
         </h3>
         <div style={{ fontSize: 13, color: "var(--muted)" }}>
           {product.type}
@@ -75,9 +79,13 @@ export default function ProductCard({
           >
             {product.priceLabel}
           </span>
+          {/* Nine buttons all reading just "Ajouter" are indistinguishable to a screen
+              reader listing the page's controls, so the accessible name carries the
+              product while the visible label stays short. */}
           <button
             className="btn-accent"
             onClick={() => add(product.id)}
+            aria-label={`Ajouter ${product.name} au panier`}
             style={{ padding: "10px 16px", fontSize: 13.5 }}
           >
             Ajouter

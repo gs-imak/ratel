@@ -2,18 +2,25 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { useCart } from "@/lib/store";
-import { PRODUCTS, productById } from "@/lib/products";
+import { productById } from "@/lib/products";
 
 export default function ProductPage() {
   const params = useParams<{ id: string }>();
   const { add } = useCart();
-  const sel = productById(params.id) ?? PRODUCTS[0];
+  /* A wrong or stale URL used to silently serve the first product instead, so a
+     customer following a dead link saw a different item than the one they asked
+     for, at HTTP 200. */
+  const sel = productById(params.id);
+
+  /* Hooks stay above the notFound() bail-out so their order never varies. */
+  const [imgIdx, setImgIdx] = useState(0);
+  useEffect(() => setImgIdx(0), [sel?.id]);
+
+  if (!sel) notFound();
 
   const gallery = sel.gallery ?? [sel.img];
-  const [imgIdx, setImgIdx] = useState(0);
-  useEffect(() => setImgIdx(0), [sel.id]);
   const mainImg = gallery[imgIdx] ?? sel.img;
 
   const meta: [string, string][] = [

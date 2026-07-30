@@ -5,9 +5,20 @@ import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import { useCart } from "@/lib/store";
 
+/* The three rails that matter in the DRC: together M-Pesa, Airtel Money and Orange
+   Money cover about 99% of mobile-money transactions (ARPTC Q4-2025). */
+const MOBILE_MONEY = [
+  { id: "mpesa", label: "M-Pesa", hint: "Vodacom" },
+  { id: "airtel", label: "Airtel Money", hint: "Airtel" },
+  { id: "orange", label: "Orange Money", hint: "Orange" },
+];
+
 export default function PaiementPage() {
-  const { items, shippingLabel, totalLabel } = useCart();
+  const { items, shippingLabel, totalLabel, clear } = useCart();
   const [placed, setPlaced] = useState(false);
+  const [operateur, setOperateur] = useState("");
+  /* Captured before the cart is emptied, because the confirmation screen prints it. */
+  const [paidLabel, setPaidLabel] = useState("");
 
   if (placed) {
     return (
@@ -32,14 +43,14 @@ export default function PaiementPage() {
           >
             ✓
           </div>
-          <h2 className="display" style={{ textTransform: "uppercase", fontSize: 30, color: "var(--ink)", marginBottom: 12 }}>
+          <h1 className="display" style={{ textTransform: "uppercase", fontSize: 30, color: "var(--ink)", marginBottom: 12 }}>
             Commande confirmée
-          </h2>
+          </h1>
           <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, marginBottom: 8 }}>
-            Merci. Votre paiement de <strong style={{ color: "var(--ink)" }}>{totalLabel}</strong> a été accepté.
+            Merci. Votre paiement de <strong style={{ color: "var(--ink)" }}>{paidLabel}</strong> a été accepté.
           </p>
           <p style={{ fontSize: 15, color: "var(--muted)", marginBottom: 28 }}>
-            Commande <strong style={{ color: "var(--ink)" }}>#RTL-2048</strong> · livraison estimée demain avant 18h.
+            Vous recevrez la confirmation et le suivi de votre commande par téléphone.
           </p>
           <Link
             href="/suivi"
@@ -83,52 +94,76 @@ export default function PaiementPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               <label className="lbl">
                 Prénom
-                <input className="fld" defaultValue="Camille" />
+                <input className="fld" placeholder="Votre prénom" />
               </label>
               <label className="lbl">
                 Nom
-                <input className="fld" defaultValue="Moreau" />
+                <input className="fld" placeholder="Votre nom" />
               </label>
               <label className="lbl" style={{ gridColumn: "1 / -1" }}>
                 Adresse
-                <input className="fld" defaultValue="12 avenue de la Victoire" />
+                <input className="fld" placeholder="Avenue et numéro" />
               </label>
               <label className="lbl">
                 Commune
-                <input className="fld" defaultValue="Kalamu" />
+                <input className="fld" placeholder="Ex. Kalamu" />
               </label>
               <label className="lbl">
                 Ville
+                {/* Kinshasa is a real default rather than a placeholder: it is correct
+                    for essentially every customer and saves them typing. */}
                 <input className="fld" defaultValue="Kinshasa" />
               </label>
             </div>
           </div>
 
+          {/* Mobile money, not card. The client was explicit: M-Pesa, Airtel Money or
+              Orange Money, and he refused cash on delivery. Card penetration in the DRC
+              is marginal, so the previous "Carte bancaire" step offered the one rail his
+              customers mostly do not hold. */}
           <div className="card" style={{ padding: 24 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-              <h3 className="display" style={{ textTransform: "uppercase", fontSize: 16, color: "var(--ink)" }}>
-                2 · Carte bancaire
-              </h3>
-              <span style={{ fontSize: 12, color: "var(--muted)" }}>🔒 Crypté SSL</span>
+            <h3
+              className="display"
+              style={{ textTransform: "uppercase", fontSize: 16, color: "var(--ink)", marginBottom: 6 }}
+            >
+              2 · Moyen de paiement
+            </h3>
+            <p style={{ fontSize: 13.5, color: "var(--muted)", lineHeight: 1.5, marginBottom: 16 }}>
+              Choisissez votre opérateur. Vous recevrez une demande de confirmation sur votre téléphone.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))", gap: 10, marginBottom: 16 }}>
+              {MOBILE_MONEY.map((m) => {
+                const active = operateur === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => setOperateur(m.id)}
+                    aria-pressed={active}
+                    style={{
+                      padding: "14px 12px",
+                      borderRadius: "var(--radius)",
+                      border: active ? "2px solid var(--accent)" : "1px solid var(--line)",
+                      background: active ? "color-mix(in srgb, var(--accent) 8%, transparent)" : "var(--surface)",
+                      color: "var(--ink)",
+                      fontWeight: 700,
+                      fontSize: 14.5,
+                      cursor: "pointer",
+                      textAlign: "left",
+                    }}
+                  >
+                    {m.label}
+                    <span style={{ display: "block", fontWeight: 500, fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
+                      {m.hint}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-            <label className="lbl" style={{ marginBottom: 14 }}>
-              Numéro de carte
-              <input className="fld" defaultValue="4242 4242 4242 4242" style={{ letterSpacing: "0.08em" }} />
+            <label className="lbl">
+              Numéro {operateur ? MOBILE_MONEY.find((m) => m.id === operateur)?.label : "mobile money"}
+              <input className="fld" type="tel" placeholder="0999 000 000" />
             </label>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
-              <label className="lbl">
-                Expiration
-                <input className="fld" defaultValue="08 / 28" />
-              </label>
-              <label className="lbl">
-                CVC
-                <input className="fld" defaultValue="•••" />
-              </label>
-              <label className="lbl">
-                Titulaire
-                <input className="fld" defaultValue="C. MOREAU" />
-              </label>
-            </div>
           </div>
         </div>
 
@@ -177,7 +212,11 @@ export default function PaiementPage() {
           </div>
           <button
             className="btn-accent"
-            onClick={() => setPlaced(true)}
+            onClick={() => {
+              setPaidLabel(totalLabel);
+              clear();
+              setPlaced(true);
+            }}
             style={{ width: "100%", marginTop: 10, padding: 16, fontSize: 16 }}
           >
             Payer {totalLabel}

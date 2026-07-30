@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import { Red } from "@/components/Brand";
 import { SECTORS } from "@/lib/products";
+
+export const metadata: Metadata = {
+  title: "Solutions par secteur",
+  description:
+    "Entreprise, aéroport, hôpital, station-service, salle de festivités, école, université ou bâtiment : équipement incendie et plan d’évacuation adaptés à votre établissement.",
+};
 
 export default function SecteursPage() {
   return (

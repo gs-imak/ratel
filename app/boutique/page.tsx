@@ -1,12 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
 import { PRODUCTS, CATEGORIES } from "@/lib/products";
 
 export default function BoutiquePage() {
-  const [cat, setCat] = useState("tous");
+  return (
+    <Suspense fallback={null}>
+      <Boutique />
+    </Suspense>
+  );
+}
+
+function Boutique() {
+  /* The URL is the single source of truth for the active category rather than local
+     state synced from it. That makes a filtered catalogue shareable, makes the back
+     button work, and means a link into /boutique?cat=… refilters even when the
+     visitor is already on the page — which a mount-only effect would not do. */
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const requested = searchParams.get("cat");
+  const cat = requested && CATEGORIES.some((c) => c.id === requested) ? requested : "tous";
+
+  const setCat = (id: string) =>
+    router.replace(id === "tous" ? "/boutique" : `/boutique?cat=${id}`, { scroll: false });
+
   const filtered = cat === "tous" ? PRODUCTS : PRODUCTS.filter((p) => p.cat === cat);
 
   return (

@@ -85,7 +85,11 @@ a {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--hi);
+  /* Brighter than --hi. The brand gold sits at about 3.3:1 on the red field, under
+     the 4.5:1 AA floor for a label this size; this lifts it to roughly 4.2:1 while
+     staying recognisably gold. Closing the gap completely would mean white text or
+     a noticeably larger label, which is the client's call on his own brand. */
+  color: #ffcf4d;
   margin-bottom: 14px;
 }
 .eyebrow-ink {
@@ -96,6 +100,47 @@ a {
   height: 2px;
   background: currentColor;
   flex: none;
+}
+
+/* ---- Header compaction on small screens ----
+   The header is sticky and its bar, nav and actions all wrap, so on a phone it
+   stacked into four rows and ate roughly a third of the viewport on every page.
+   Tightening the type and spacing below 700px keeps it to about one third of that
+   without introducing a burger menu, which would hide the shop links a first-time
+   visitor most needs. */
+@media (max-width: 700px) {
+  .site-header-bar {
+    padding: 8px 16px !important;
+    gap: 10px !important;
+  }
+  .site-header-nav {
+    gap: 12px !important;
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap !important;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-header-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .site-header-nav a {
+    font-size: 13.5px !important;
+    white-space: nowrap;
+    padding: 4px 0 !important;
+  }
+  .site-header-actions {
+    margin-left: auto;
+    gap: 8px !important;
+  }
+  .site-header-actions a {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+  .site-header-brand-sub {
+    display: none;
+  }
 }
 
 /* ---- Gold promo band: the single CTA-band style ---- */
@@ -109,11 +154,20 @@ a {
   filter: saturate(0.94) contrast(1.03);
 }
 
-/* ---- Brand focus states ---- */
+/* ---- Brand focus states ----
+   Gold alone sits at roughly 1.6:1 against the white cards and is effectively
+   invisible there for keyboard users. A dark ring carries the contrast on light
+   surfaces, with a gold halo outside it so the indicator also reads against the
+   red page field and the dark footer. */
 a:focus-visible,
-button:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--hi) 75%, transparent);
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--ink);
   outline-offset: 2px;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--hi) 85%, transparent);
+  border-radius: 3px;
 }
 
 /* ---- Buttons ---- */

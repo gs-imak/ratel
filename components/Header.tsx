@@ -32,6 +32,7 @@ export default function Header() {
       {/* fire-safety caution stripe */}
       <div className="hazard" />
       <div
+        className="site-header-bar"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -63,6 +64,7 @@ export default function Header() {
               <span style={{ fontSize: 30 }}>R</span>atel
             </span>
             <span
+              className="site-header-brand-sub"
               style={{
                 fontSize: 10.5,
                 letterSpacing: "0.06em",
@@ -76,7 +78,10 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav style={{ display: "flex", gap: 20, alignItems: "center", marginLeft: "auto", flexWrap: "wrap" }}>
+        <nav
+          className="site-header-nav"
+          style={{ display: "flex", gap: 20, alignItems: "center", marginLeft: "auto", flexWrap: "wrap" }}
+        >
           {NAV.map((n) => {
             const active = n.match(pathname);
             return (
@@ -99,7 +104,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div className="site-header-actions" style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <Link
             href="/devis"
             className="btn-hi"
@@ -132,7 +137,9 @@ export default function Header() {
             }}
           >
             Panier
+            {/* The bare number is meaningless read aloud on its own. */}
             <span
+              aria-label={`${count} article${count > 1 ? "s" : ""} dans le panier`}
               style={{
                 minWidth: 20,
                 height: 20,

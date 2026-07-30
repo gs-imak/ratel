@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Oswald, Public_Sans, Source_Serif_4 } from "next/font/google";
+import { Oswald, Public_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/lib/store";
 import Header from "@/components/Header";
@@ -15,24 +15,30 @@ const publicSans = Public_Sans({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-public-sans",
 });
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-source-serif",
-});
+/* Source Serif 4 used to be loaded and preloaded here in four weights and was never
+   referenced by any stylesheet or component. Removed: it cost every visitor a
+   render-blocking font download for nothing. */
 
 export const metadata: Metadata = {
-  title: "Ratel",
+  /* Every route used to render the single title "Ratel", so browser tabs, bookmarks
+     and search results were indistinguishable. Pages set their own title and the
+     template appends the brand. */
+  title: {
+    default: "Ratel — Prévention & Sécurité Incendie à Kinshasa",
+    template: "%s | Ratel",
+  },
   description:
-    "Extincteurs certifiés NF/CE livrés vite et bien, et une alerte géolocalisée qui prévient les secours en un seul geste. La vie n'a pas de prix.",
+    "Extincteurs certifiés, formation incendie sur site et alerte géolocalisée Ratalerte, à Kinshasa et sur toute la République. La vie n'a pas de prix.",
   metadataBase: new URL("https://ratel-self.vercel.app"),
   openGraph: {
-    title: "Ratel — Prévention Sécurité Incendie",
+    title: "Ratel — Prévention & Sécurité Incendie",
     description:
-      "Extincteurs certifiés et alerte géolocalisée. Protégez votre foyer, votre véhicule, votre entreprise.",
+      "Extincteurs certifiés, formation sur site et alerte géolocalisée. Kinshasa et toute la République.",
     type: "website",
-    locale: "fr_FR",
+    locale: "fr_CD",
+    siteName: "Ratel",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
@@ -41,7 +47,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${oswald.variable} ${publicSans.variable} ${sourceSerif.variable}`}
+      className={`${oswald.variable} ${publicSans.variable}`}
     >
       <body
         className="theme-ratel"

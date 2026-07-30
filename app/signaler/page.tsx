@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import ReportMap from "@/components/ReportMap";
 import Eyebrow from "@/components/Eyebrow";
+import { Red } from "@/components/Brand";
 import { REPORT_TYPES } from "@/lib/products";
 
 type Stage = "idle" | "locating" | "located" | "sent";
@@ -25,14 +26,32 @@ export default function SignalerPage() {
 
   return (
     <main style={{ maxWidth: 860, margin: "0 auto", padding: "44px 24px 80px" }}>
-      <Eyebrow>Urgence · Réservé aux abonnés</Eyebrow>
+      <Eyebrow>Ratalerte · Réservé aux abonnés</Eyebrow>
       <h1 className="display on-bg" style={{ fontSize: "clamp(30px,4vw,46px)", color: "var(--ink)", marginBottom: 10 }}>
         Signaler un incendie
       </h1>
-      <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 30 }}>
-        En cas d’urgence réelle, déclenchez l’alerte. Votre position GPS sera transmise aux secours et à vos
-        contacts de confiance.
+      <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 20 }}>
+        Voici comment fonctionnera Ratalerte pour les abonnés : une alerte géolocalisée envoyée en un seul geste,
+        transmise à l’équipe <Red>Ratel</Red> et à vos contacts de confiance.
       </p>
+
+      {/* This page is a walkthrough, not a working alert. No geolocation is read and no
+          alert is sent anywhere. Saying so plainly matters more here than on any other
+          page: a visitor who believed a real fire had been reported, and waited, could be
+          hurt by the misunderstanding. */}
+      <div
+        className="card"
+        style={{ padding: "16px 18px", marginBottom: 26, display: "flex", gap: 12, alignItems: "flex-start" }}
+      >
+        <span style={{ fontSize: 20, lineHeight: 1.2 }} aria-hidden>
+          ⚠️
+        </span>
+        <p style={{ fontSize: 14, lineHeight: 1.55, color: "var(--ink)", margin: 0 }}>
+          <strong>Démonstration.</strong> Cette page présente le fonctionnement de Ratalerte. Aucune alerte n’est
+          réellement transmise et aucune position n’est enregistrée. Le service sera activé pour les abonnés une
+          fois leur compte créé.
+        </p>
+      </div>
 
       <div className="card">
         {/* map */}
@@ -123,8 +142,10 @@ export default function SignalerPage() {
                 <br />
                 un incendie
               </button>
-              <p style={{ fontSize: 13.5, color: "var(--muted)", marginTop: 20 }}>
-                Appuyez uniquement en cas d’urgence réelle. La géolocalisation se déclenche immédiatement.
+              <p style={{ fontSize: 13.5, color: "var(--muted)", marginTop: 20, maxWidth: "34em", marginInline: "auto" }}>
+                Une fois le service actif, un appui suffit : la géolocalisation se déclenche immédiatement.
+                Déclencher l’alerte sans urgence réelle entraîne une pénalité de 40 % qui s’ajoute au prix de
+                l’abonnement.
               </p>
             </div>
           )}
@@ -187,9 +208,12 @@ export default function SignalerPage() {
               >
                 <span style={{ color: "var(--accent)", fontSize: 20 }}>📍</span>
                 <div style={{ fontSize: 13.5, color: "var(--ink)" }}>
-                  <strong>Position confirmée</strong> · {COORDS}
+                  <strong>Exemple de position</strong> · {COORDS}
                   <br />
-                  <span style={{ color: "var(--muted)" }}>Avenue de la Victoire, Kinshasa (précision ±8 m)</span>
+                  <span style={{ color: "var(--muted)" }}>
+                    Avenue de la Victoire, Kinshasa. Position d’illustration, votre position réelle sera captée par
+                    l’application.
+                  </span>
                 </div>
               </div>
               <button
@@ -200,7 +224,8 @@ export default function SignalerPage() {
                 Envoyer l’alerte aux secours
               </button>
               <p style={{ textAlign: "center", fontSize: 12.5, color: "var(--muted)", marginTop: 12 }}>
-                Les secours et vos contacts seront notifiés avec votre position.
+                Pour les abonnés, l’équipe <Red>Ratel</Red> et vos contacts de confiance seront notifiés avec votre
+                position.
               </p>
             </>
           )}
@@ -224,10 +249,11 @@ export default function SignalerPage() {
                 ✓
               </div>
               <h2 className="display" style={{ textTransform: "uppercase", fontSize: 26, color: "var(--ink)", marginBottom: 10 }}>
-                Alerte transmise
+                Voilà ce que verra l’abonné
               </h2>
               <p style={{ fontSize: 15.5, color: "var(--muted)", lineHeight: 1.6, maxWidth: "34em", margin: "0 auto 22px" }}>
-                Les secours ont été notifiés avec votre position.{" "}
+                Sa position part vers l’équipe <Red>Ratel</Red> et ses contacts de confiance, les sapeurs-pompiers
+                sont prévenus, et une équipe se déplace pour la première intervention.{" "}
                 <strong style={{ color: "var(--ink)" }}>Mettez-vous en sécurité, éloignez-vous des flammes</strong> et
                 n’inhalez pas les fumées.
               </p>
@@ -240,20 +266,22 @@ export default function SignalerPage() {
                   marginBottom: 24,
                 }}
               >
+                {/* No intervention time is advertised. Ratel has not committed to one, and
+                    a number printed here would read as a promise during an emergency. */}
                 <div style={{ padding: "14px 22px", borderRight: "1px solid var(--line)" }}>
                   <div style={{ fontSize: 12, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
-                    Intervention estimée
+                    Pompiers
                   </div>
-                  <div className="display" style={{ fontWeight: 700, fontSize: 26, color: "var(--accent)" }}>
-                    ≈ 6 min
+                  <div className="display" style={{ fontWeight: 700, fontSize: 20, color: "var(--accent)" }}>
+                    Prévenus
                   </div>
                 </div>
                 <div style={{ padding: "14px 22px" }}>
                   <div style={{ fontSize: 12, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
-                    Réf. alerte
+                    Équipe Ratel
                   </div>
-                  <div className="display" style={{ fontWeight: 700, fontSize: 26, color: "var(--ink)" }}>
-                    #A-7731
+                  <div className="display" style={{ fontWeight: 700, fontSize: 20, color: "var(--ink)" }}>
+                    En route
                   </div>
                 </div>
               </div>
@@ -301,6 +329,18 @@ export default function SignalerPage() {
           )}
         </div>
       </div>
+
+      {/* Client-confirmed disclaimer. The DRC has no legislation governing fire safety or
+          the fire service, so what the site states is effectively the commitment Ratel is
+          held to. Saying plainly what Ratalerte is and is not protects both sides. */}
+      <p
+        className="on-bg-soft"
+        style={{ fontSize: 13, lineHeight: 1.6, color: "var(--muted)", marginTop: 22, maxWidth: "46em" }}
+      >
+        <Red>Ratel</Red> ne remplace pas les services publics de secours. En cas d’incendie, les sapeurs-pompiers
+        sont systématiquement prévenus. La première intervention assurée par nos équipes est un service
+        complémentaire, réservé aux abonnés Ratalerte.
+      </p>
     </main>
   );
 }

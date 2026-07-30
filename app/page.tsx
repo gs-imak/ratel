@@ -36,9 +36,9 @@ export default function HomePage() {
                 Des extincteurs certifiés. Une livraison rapide et suivie en temps réel.
               </p>
               <p style={{ marginBottom: 12 }}>
-                <strong style={{ color: "#fff" }}>Ratalerte</strong>, réservée pour les abonnés <Red>Ratel</Red> : une alerte
-                géolocalisée en cas d’urgence réelle. Déclenchez l’alerte, votre position GPS sera transmise pour une
-                intervention rapide.
+                <strong style={{ color: "#fff" }}>Ratalerte</strong>, réservée aux abonnés <Red>Ratel</Red>, c’est une
+                alerte géolocalisée en cas d’urgence réelle. Déclenchez l’alerte, votre position GPS est transmise
+                pour une intervention rapide.
               </p>
               <p>
                 Protégez votre foyer, votre véhicule, votre moto, vos entreprises ainsi que vos bâtiments.

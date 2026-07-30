@@ -12,7 +12,7 @@ const MAX = 1200;
 const CONTACT_PHOTO: string | null = null;
 
 export const metadata: Metadata = {
-  title: "Formation incendie sur site | Ratel",
+  title: "Formation incendie sur site",
   description:
     "Formation incendie dans vos locaux : manipulation d’extincteur sur feu réel, réglementation ERP et exercices en conditions réelles. Sous 48h à Kinshasa, sous 96h sur toute la République.",
 };
