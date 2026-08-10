@@ -45,3 +45,6 @@ next-env.d.ts
 # raw Claude Design export (kept locally as reference, not part of the app)
 /design-src
 
+
+# local agent state
+.claude/.router-state/
