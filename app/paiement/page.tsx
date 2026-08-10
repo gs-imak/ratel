@@ -44,13 +44,18 @@ export default function PaiementPage() {
             ✓
           </div>
           <h1 className="display" style={{ textTransform: "uppercase", fontSize: 30, color: "var(--ink)", marginBottom: 12 }}>
-            Commande confirmée
+            Votre demande est prête
           </h1>
           <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.6, marginBottom: 8 }}>
-            Merci. Votre paiement de <strong style={{ color: "var(--ink)" }}>{paidLabel}</strong> a été accepté.
+            Récapitulatif de votre commande, <strong style={{ color: "var(--ink)" }}>{paidLabel}</strong>.
           </p>
-          <p style={{ fontSize: 15, color: "var(--muted)", marginBottom: 28 }}>
-            Vous recevrez la confirmation et le suivi de votre commande par téléphone.
+          {/* This flow takes no money and records no order. Telling a visitor his payment
+              was accepted would be false, and it is the kind of false statement a customer
+              acts on. Stated plainly until the payment rails and the orders table exist. */}
+          <p style={{ fontSize: 15, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28 }}>
+            La commande en ligne n’est pas encore ouverte. Aucun paiement n’a été prélevé et aucune commande n’a été
+            enregistrée. Contactez-nous pour finaliser votre achat, nous vous rappelons pour la livraison et le
+            paiement mobile money.
           </p>
           <Link
             href="/suivi"

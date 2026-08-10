@@ -25,8 +25,13 @@ export default function TrackMap() {
           [-4.3095, 15.31],
           home,
         ];
-        const map = L.map(el, { zoomControl: true, attributionControl: false, scrollWheelZoom: false });
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+        /* Attribution stays on: the OpenStreetMap tile policy requires visible credit,
+           and hiding it on a commercial site is a licence breach, not a style choice. */
+        const map = L.map(el, { zoomControl: true, attributionControl: true, scrollWheelZoom: false });
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
         L.polyline(route, { color: "#D81E27", weight: 5, opacity: 0.9, lineCap: "round" }).addTo(map);
         L.marker(depot, { icon: pin(L, "#16110D", false) }).addTo(map);
         L.marker(home, { icon: pin(L, "#D81E27", true) }).addTo(map);

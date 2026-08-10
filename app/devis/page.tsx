@@ -64,8 +64,11 @@ export default function DevisPage() {
               </>
             )}
           </p>
-          <p style={{ fontSize: 15, color: "var(--muted)", marginBottom: 28 }}>
-            Référence <strong style={{ color: "var(--ink)" }}>#DV-4096</strong>
+          {/* No invented reference number. Nothing is stored yet, so a reference would be
+              a number the customer could quote back at someone who has never seen it. */}
+          <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28, maxWidth: "34em", marginInline: "auto" }}>
+            L’envoi automatique des demandes n’est pas encore activé. Si vous n’avez pas de retour rapidement,
+            contactez-nous directement, votre demande sera traitée en priorité.
           </p>
           <Link
             href="/"

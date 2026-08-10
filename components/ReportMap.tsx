@@ -18,10 +18,14 @@ export default function ReportMap() {
         const home: [number, number] = [-4.33876, 15.30725];
         const map = L.map(el, {
           zoomControl: true,
-          attributionControl: false,
+          /* Required by the OpenStreetMap tile policy. See TrackMap. */
+          attributionControl: true,
           scrollWheelZoom: false,
         }).setView(home, 16);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
         L.marker(home, { icon: pin(L, "#D81E27", true) }).addTo(map);
         mapRef.current = map;
         setTimeout(() => map.invalidateSize(), 120);
