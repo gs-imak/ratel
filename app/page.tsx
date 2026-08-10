@@ -82,7 +82,10 @@ export default function HomePage() {
               {[
                 ["24-48h", "Livraison sécurisée"],
                 ["NF · CE", "Matériel certifié"],
-                ["< 7 min", "Alerte aux secours"],
+                /* No response-time figure is advertised. Ratel has committed to none, and
+                   a number here reads as a guarantee in a country where the published copy
+                   is the only definition of what was promised. */
+                ["GPS", "Alerte géolocalisée"],
               ].map(([big, small]) => (
                 <div key={small}>
                   <div className="display" style={{ fontWeight: 700, fontSize: 30 }}>
@@ -343,8 +346,9 @@ export default function HomePage() {
                 marginBottom: 28,
               }}
             >
-              Ratalerte transmet instantanément votre position GPS aux secours et à vos contacts de confiance pour une
-              intervention rapide. Pendant ce temps, restez en sécurité.
+              Ratalerte transmet instantanément votre position GPS à l’équipe <Red>Ratel</Red> et à vos contacts de
+              confiance. Les sapeurs-pompiers sont prévenus et une équipe se déplace pour la première intervention.
+              Pendant ce temps, restez en sécurité.
             </p>
             <Link
               href="/signaler"
@@ -358,6 +362,12 @@ export default function HomePage() {
             >
               Découvrir l’alerte géolocalisée →
             </Link>
+            {/* Same disclaimer as /signaler. With no DRC legislation covering fire safety,
+                the published copy is the only definition of what Ratel promised. */}
+            <p style={{ fontSize: 12.5, lineHeight: 1.55, color: "rgba(22,17,13,.7)", marginTop: 18, maxWidth: "34em" }}>
+              <Red>Ratel</Red> ne remplace pas les services publics de secours. La première intervention est un
+              service complémentaire réservé aux abonnés Ratalerte.
+            </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {ALERT_POINTS.map((a) => (
