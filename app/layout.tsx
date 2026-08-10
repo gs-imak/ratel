@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Oswald, Public_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/lib/store";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ServiceWorker from "@/components/ServiceWorker";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -39,6 +40,19 @@ export const metadata: Metadata = {
     siteName: "Ratel",
   },
   twitter: { card: "summary_large_image" },
+  /* iOS ignores the manifest, so the installed-app behaviour is declared here. */
+  appleWebApp: {
+    capable: true,
+    title: "Ratel",
+    statusBarStyle: "black-translucent",
+  },
+};
+
+export const viewport: Viewport = {
+  /* Tints the phone's browser chrome in the brand red once installed. */
+  themeColor: "#c11620",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -57,6 +71,7 @@ export default function RootLayout({
           <Header />
           <div style={{ flex: 1 }}>{children}</div>
           <Footer />
+          <ServiceWorker />
         </Providers>
       </body>
     </html>
