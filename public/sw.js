@@ -41,8 +41,17 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  /* Static assets: serve from cache when present, otherwise fetch and keep a copy.
-     Next fingerprints these filenames, so a cached copy can never go stale. */
+  /* Cache-first ONLY for build assets under /_next/static/, whose filenames carry a
+     content hash and therefore change whenever their contents change.
+     Everything else goes to the network. In particular /images/ and the
+     /_next/image URLs derived from them must NEVER be cached here: product photos
+     are replaced in place under the same filename when the client supplies his
+     own, so a cached copy would pin returning visitors to the old picture forever
+     with no way to clear it. Vercel already serves these with sensible HTTP
+     caching, which revalidates properly. */
+  const url = new URL(request.url);
+  if (!url.pathname.startsWith("/_next/static/")) return;
+
   event.respondWith(
     caches.match(request).then(
       (hit) =>
