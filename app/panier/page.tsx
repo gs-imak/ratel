@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import { useCart } from "@/lib/store";
@@ -55,9 +56,8 @@ export default function PanierPage() {
                   alignItems: "center",
                 }}
               >
-                <div style={{ width: 74, height: 74, flex: "none", borderRadius: 6, overflow: "hidden", background: "#fff", border: "1px solid var(--line)" }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.img} alt={item.name} className="pimg" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <div style={{ position: "relative", width: 74, height: 74, flex: "none", borderRadius: 6, overflow: "hidden", background: "#fff", border: "1px solid var(--line)" }}>
+                  <Image src={item.img} alt={item.name} fill sizes="74px" className="pimg" style={{ objectFit: "cover" }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontWeight: 700, color: "var(--ink)", fontSize: 15.5 }}>{item.name}</div>

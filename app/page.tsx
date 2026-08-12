@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
@@ -108,6 +109,7 @@ export default function HomePage() {
           <div style={{ position: "relative" }}>
             <div
               style={{
+                position: "relative",
                 aspectRatio: "4 / 5",
                 borderRadius: "var(--radius)",
                 border: "1px solid rgba(255,255,255,.14)",
@@ -115,11 +117,14 @@ export default function HomePage() {
                 background: "#0e0b08",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {/* priority: this is the largest contentful paint on the homepage. */}
+              <Image
                 src="/images/hero-fire.jpg"
-                alt="Flammes — un départ de feu"
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                alt="Flammes, un départ de feu"
+                fill
+                priority
+                sizes="(max-width: 700px) 100vw, 520px"
+                style={{ objectFit: "cover" }}
               />
             </div>
             <div

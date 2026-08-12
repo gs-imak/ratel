@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/store";
 import type { Product } from "@/lib/products";
@@ -25,14 +26,18 @@ export default function ProductCard({
         href={`/produit/${product.id}`}
         style={{ display: "block", textDecoration: "none" }}
       >
-        <div style={{ aspectRatio: aspect, background: "#fff", overflow: "hidden" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+        {/* next/image serves a resized AVIF or WebP instead of the full-size JPEG.
+            The source photos are 150 to 460 KB each and this page shows nine of them,
+            which is the single heaviest thing a customer on Kinshasa mobile data
+            downloads. `fill` needs a positioned parent, hence position: relative. */}
+        <div style={{ position: "relative", aspectRatio: aspect, background: "#fff", overflow: "hidden" }}>
+          <Image
             src={product.img}
             alt={product.name}
-            loading="lazy"
+            fill
+            sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 300px"
             className="pimg"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            style={{ objectFit: "cover" }}
           />
         </div>
       </Link>

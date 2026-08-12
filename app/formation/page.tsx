@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import { Red } from "@/components/Brand";
@@ -96,18 +97,20 @@ export default function FormationPage() {
           {CONTACT_PHOTO ? (
             <div
               style={{
+                position: "relative",
                 aspectRatio: "16 / 10",
                 borderRadius: "var(--radius)",
                 overflow: "hidden",
                 border: "1px solid var(--line)",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={CONTACT_PHOTO}
                 alt="Notre équipe à votre écoute pour organiser votre formation"
+                fill
+                sizes="(max-width: 700px) 100vw, 520px"
                 className="pimg"
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                style={{ objectFit: "cover" }}
               />
             </div>
           ) : (

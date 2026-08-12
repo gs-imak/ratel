@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { useCart } from "@/lib/store";
@@ -43,6 +44,7 @@ export default function ProductPage() {
         <div>
           <div
             style={{
+              position: "relative",
               aspectRatio: "1 / 1",
               borderRadius: "var(--radius)",
               background: "#fff",
@@ -50,12 +52,14 @@ export default function ProductPage() {
               border: "1px solid var(--line)",
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={mainImg}
               alt={sel.name}
+              fill
+              priority
+              sizes="(max-width: 700px) 100vw, 560px"
               className="pimg"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              style={{ objectFit: "cover" }}
             />
           </div>
           {gallery.length > 1 && (
@@ -66,6 +70,7 @@ export default function ProductPage() {
                   onClick={() => setImgIdx(i)}
                   aria-label={`Photo ${i + 1}`}
                   style={{
+                    position: "relative",
                     aspectRatio: "1 / 1",
                     borderRadius: 6,
                     overflow: "hidden",
@@ -75,13 +80,7 @@ export default function ProductPage() {
                     border: i === imgIdx ? "2px solid var(--accent)" : "1px solid var(--line)",
                   }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={g}
-                    alt=""
-                    loading="lazy"
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
+                  <Image src={g} alt="" fill sizes="110px" style={{ objectFit: "cover" }} />
                 </button>
               ))}
             </div>
