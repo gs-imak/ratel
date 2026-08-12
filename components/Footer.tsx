@@ -38,7 +38,9 @@ export default function Footer() {
           margin: "0 auto",
           padding: "54px 24px 30px",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+          /* 150px, not 180px: at 768 the four tracks would not fit, dropping
+             CERTIFICATIONS alone onto its own row. 4*150 + 3*32 = 696 fits 720. */
+          gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))",
           gap: 32,
         }}
       >
@@ -92,12 +94,14 @@ export default function Footer() {
             >
               {col.title}
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 9, fontSize: 14 }}>
+            <div style={{ display: "flex", flexDirection: "column", fontSize: 14 }}>
               {col.items.map((i) => (
+                /* display:block with vertical padding: these were 21px-tall targets
+                   stacked 9px apart, under the 44px minimum on a phone. */
                 <Link
                   key={i.label}
                   href={i.href}
-                  style={{ color: "rgba(255,255,255,.7)", textDecoration: "none" }}
+                  style={{ color: "rgba(255,255,255,.7)", textDecoration: "none", display: "block", padding: "8px 0" }}
                 >
                   {i.label}
                 </Link>

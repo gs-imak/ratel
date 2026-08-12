@@ -46,20 +46,28 @@ export default function PanierPage() {
         >
           <div className="card" style={{ display: "flex", flexDirection: "column" }}>
             {items.map((item) => (
+              /* The row wraps below ~620px. It used to be a single flex line whose
+                 fixed children (thumb, stepper, price, remove) exceeded the card on
+                 every phone and tablet width, so the only flexible child, the name
+                 column, collapsed to 0px and the remove button was pushed outside
+                 the card, where .card's overflow:hidden clipped it. A customer on a
+                 phone could not remove an item from their basket. */
               <div
                 key={item.id}
+                className="cart-row"
                 style={{
                   display: "flex",
                   gap: 16,
                   padding: 18,
                   borderBottom: "1px solid var(--line)",
                   alignItems: "center",
+                  flexWrap: "wrap",
                 }}
               >
                 <div style={{ position: "relative", width: 74, height: 74, flex: "none", borderRadius: 6, overflow: "hidden", background: "#fff", border: "1px solid var(--line)" }}>
                   <Image src={item.img} alt={item.name} fill sizes="74px" className="pimg" style={{ objectFit: "cover" }} />
                 </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div className="cart-row-name" style={{ flex: "1 1 180px", minWidth: 0 }}>
                   <div style={{ fontWeight: 700, color: "var(--ink)", fontSize: 15.5 }}>{item.name}</div>
                   <div style={{ fontSize: 13, color: "var(--muted)" }}>
                     {item.type} · {item.cap}
@@ -93,14 +101,27 @@ export default function PanierPage() {
                     +
                   </button>
                 </div>
-                <div style={{ width: 88, textAlign: "right", fontWeight: 700, color: "var(--ink)" }}>
+                <div style={{ flex: "0 0 auto", marginLeft: "auto", textAlign: "right", fontWeight: 700, color: "var(--ink)", whiteSpace: "nowrap" }}>
                   {item.lineLabel}
                 </div>
                 <button
                   onClick={() => remove(item.id)}
                   title="Retirer"
                   aria-label={`Retirer ${item.name}`}
-                  style={{ background: "none", border: "none", color: "var(--muted)", cursor: "pointer", fontSize: 18 }}
+                  style={{
+                    flex: "0 0 auto",
+                    width: 36,
+                    height: 36,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "none",
+                    border: "none",
+                    color: "var(--muted)",
+                    cursor: "pointer",
+                    fontSize: 20,
+                    lineHeight: 1,
+                  }}
                 >
                   ×
                 </button>
@@ -148,7 +169,7 @@ export default function PanierPage() {
               Passer au paiement →
             </Link>
             <div style={{ textAlign: "center", fontSize: 12.5, color: "var(--muted)", marginTop: 12 }}>
-              🔒 Paiement sécurisé · CB, Visa, Mastercard
+              🔒 Paiement par mobile money · M-Pesa, Airtel Money, Orange Money
             </div>
           </div>
         </div>

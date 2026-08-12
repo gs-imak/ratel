@@ -89,9 +89,12 @@ export default function SecteursPage() {
                 <strong style={{ color: "var(--ink)" }}>le point de rassemblement</strong> en cas d’incendie.
               </p>
               <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--muted)", marginBottom: 16 }}>
-                Obligatoire dans la quasi-totalité des ERP et des locaux professionnels, il doit respecter la norme{" "}
-                <span className="badge-cert" style={{ fontSize: 12.5, padding: "3px 9px" }}>NF X 08-070</span> pour
-                avoir une réelle valeur réglementaire.
+                {/* NF X 08-070 is a French AFNOR standard and carries no legal force in the
+                    DRC, so it is presented as the quality reference it is, not as an
+                    obligation. */}
+                Nous concevons nos plans selon la norme{" "}
+                <span className="badge-cert" style={{ fontSize: 12.5, padding: "3px 9px" }}>NF X 08-070</span>, la
+                référence en matière de plans d’évacuation.
               </p>
               <p style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink)", fontWeight: 600 }}>
                 <Red>Ratel</Red> conçoit, imprime, pose et met à jour vos plans d’évacuation sur toute l’étendue de la

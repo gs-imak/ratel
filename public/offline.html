@@ -44,5 +44,12 @@
       sera revenu.
     </p>
     <button onclick="location.reload()">Réessayer</button>
+    <script>
+      /* The copy promises the page reloads by itself once the network is back,
+         so make that true rather than weakening the promise. */
+      window.addEventListener("online", function () {
+        location.reload();
+      });
+    </script>
   </body>
 </html>

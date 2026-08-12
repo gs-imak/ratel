@@ -48,12 +48,20 @@ export function Providers({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("ratel.cart");
-    if (saved) {
-      try {
-        setCart(JSON.parse(saved));
-      } catch {
-        /* ignore corrupt cart */
+    if (!saved) return;
+    try {
+      const parsed = JSON.parse(saved) as CartState;
+      /* Drop ids the catalogue no longer contains, which is what happens the day
+         the real products replace the placeholders. The render path already skips
+         them, but pruning here stops them living in storage forever and keeps the
+         saved cart honest. */
+      const pruned: CartState = {};
+      for (const [id, qty] of Object.entries(parsed)) {
+        if (typeof qty === "number" && qty > 0 && productById(id)) pruned[id] = qty;
       }
+      setCart(pruned);
+    } catch {
+      /* ignore corrupt cart */
     }
   }, []);
 
@@ -113,7 +121,7 @@ export function Providers({ children }: { children: ReactNode }) {
       totalLabel: fmt(total),
       shipNote:
         subtotal >= FREE_SHIPPING_THRESHOLD
-          ? `Livraison offerte dès ${fmt(FREE_SHIPPING_THRESHOLD)} — acquise.`
+          ? `Livraison offerte, votre panier dépasse ${fmt(FREE_SHIPPING_THRESHOLD)}.`
           : `Livraison offerte dès ${fmt(FREE_SHIPPING_THRESHOLD)} d’achat.`,
       add,
       changeQty,

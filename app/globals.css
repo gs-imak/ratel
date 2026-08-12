@@ -108,7 +108,20 @@ a {
    Tightening the type and spacing below 700px keeps it to about one third of that
    without introducing a burger menu, which would hide the shop links a first-time
    visitor most needs. */
-@media (max-width: 700px) {
+/* Cart rows: below this width the name column and the controls each take a full
+   line, instead of competing for space the row does not have. */
+@media (max-width: 620px) {
+  .cart-row-name {
+    flex: 1 1 100% !important;
+    order: -1;
+  }
+}
+
+/* The header bar, its nav and its actions all wrap, and between 701px and about
+   1150px they wrapped onto three or four rows, leaving a 205px sticky header
+   eating a fifth of an iPad screen on every page. The compaction below covers
+   that whole band, not just phones. */
+@media (max-width: 1150px) {
   .site-header-bar {
     padding: 8px 16px !important;
     gap: 10px !important;
@@ -138,9 +151,20 @@ a {
     padding: 8px 12px !important;
     font-size: 13px !important;
   }
+}
+
+/* The tagline under the wordmark only needs to go on a phone. There is room for
+   it on a tablet or a small laptop once the nav stops wrapping. */
+@media (max-width: 700px) {
   .site-header-brand-sub {
     display: none;
   }
+}
+
+/* Anchor targets must clear the sticky header, otherwise /#demo lands with its
+   heading hidden underneath it. */
+html {
+  scroll-padding-top: 96px;
 }
 
 /* ---- Gold promo band: the single CTA-band style ---- */

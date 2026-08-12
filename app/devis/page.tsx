@@ -121,18 +121,23 @@ export default function DevisPage() {
         className="card"
         style={{ padding: 28, display: "flex", flexDirection: "column", gap: 18 }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+        {/* auto-fit rather than a hard two-column grid: at 390px the fixed version
+            gave 119px fields that could not show a phone number. */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 16 }}>
           <label className="lbl">
             Nom / Société
             <input className="fld" required placeholder="Votre nom ou société" />
           </label>
+          {/* Phone is the required field, not email. Every follow-up the site promises
+              is a callback, and in Kinshasa a WhatsApp number reaches a prospect far
+              more reliably than an email address. */}
           <label className="lbl">
-            Téléphone
-            <input className="fld" type="tel" placeholder="0999 000 000" />
+            Téléphone (WhatsApp de préférence)
+            <input className="fld" type="tel" required placeholder="0999 000 000" />
           </label>
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
-            Email
-            <input className="fld" type="email" required placeholder="vous@exemple.cd" />
+            Email (facultatif)
+            <input className="fld" type="email" placeholder="vous@exemple.cd" />
           </label>
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
             Secteur

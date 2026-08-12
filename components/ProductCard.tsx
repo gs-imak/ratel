@@ -64,9 +64,12 @@ export default function ProductCard({
             {product.name}
           </Link>
         </h3>
+        {/* The detector has no fire class, so it stores "—". Printing "Classes —"
+            reads as missing data rather than as not applicable. */}
         <div style={{ fontSize: 13, color: "var(--muted)" }}>
           {product.type}
-          {variant === "shop" ? ` · ${product.cap}` : ""} · Classes {product.classes}
+          {variant === "shop" ? ` · ${product.cap}` : ""}
+          {product.classes !== "—" ? ` · Classes ${product.classes}` : ""}
         </div>
         <div
           style={{

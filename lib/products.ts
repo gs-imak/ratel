@@ -77,7 +77,7 @@ const RAW: Omit<Product, "priceLabel" | "kind" | "img">[] = [
   { id: "p4", name: "Extincteur Eau pulvérisée 6 L", type: "Eau + additif", classes: "A B", cap: "6 L", price: 135000, cat: "maison", tag: "Bureau & habitation", blurb: "Refroidit et étouffe les feux de matériaux solides, sans résidu de poudre." },
   { id: "p5", name: "Extincteur Mousse 6 L", type: "Mousse", classes: "A B", cap: "6 L", price: 150000, cat: "entreprise", tag: "Entreprise & ERP", blurb: "Haute efficacité sur les liquides inflammables. Conforme aux exigences des établissements recevant du public." },
   { id: "p6", name: "Couverture anti-feu 1,2 m", type: "Couverture", classes: "F", cap: "1,2 m", price: 47000, cat: "cuisine", tag: "Cuisine", blurb: "Étouffe instantanément un feu de friture ou de poêle. Un geste simple, une vie sauvée." },
-  { id: "p7", name: "Détecteur de fumée NF", type: "DAAF", classes: "—", cap: "pile 10 ans", price: 32000, cat: "maison", tag: "Maison", blurb: "Détecteur autonome certifié NF, pile longue durée. Obligatoire dans chaque logement." },
+  { id: "p7", name: "Détecteur de fumée NF", type: "DAAF", classes: "—", cap: "pile 10 ans", price: 32000, cat: "maison", tag: "Maison", blurb: "Détecteur autonome certifié NF, pile longue durée. Recommandé dans chaque logement." },
   { id: "p8", name: "Extincteur Poudre ABC 2 kg", type: "Poudre ABC", classes: "A B C", cap: "2 kg", price: 82000, cat: "voiture", tag: "Voiture", blurb: "Le bon compromis encombrement / autonomie pour la voiture familiale." },
   { id: "p9", name: "Extincteur compact multi-usages 500 ml", type: "Spray extincteur", classes: "A B F", cap: "500 ml", price: 75000, cat: "maison", tag: "Multi-usages", blurb: "Le spray compact à garder partout : maison, voiture, camping, bateau. Support mural inclus, prêt à l’emploi en un geste — idéal pour les petits départs de feu." },
 ];
@@ -117,7 +117,11 @@ export const PASS_STEPS = [
 ];
 
 export const TRUST = [
-  { title: "Matériel certifié", desc: "Normes NF, CE et EN 3 garanties." },
+  /* Softened from "Normes NF, CE et EN 3 garanties": EN 3 covers portable
+     extinguishers only, so it cannot apply to the blanket or the detector, and no
+     supplier certificate is in hand yet. Restore the stronger claim once the real
+     catalogue arrives with its documentation. */
+  { title: "Matériel certifié", desc: "Conforme aux normes CE et EN." },
   { title: "Livraison 24-48h", desc: "Expédition rapide et suivie." },
   { title: "Garantie 6 mois", desc: "Sur tous les extincteurs." },
   { title: "Conseil expert", desc: "Le bon appareil pour votre risque." },

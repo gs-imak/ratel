@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import ReportMap from "@/components/ReportMap";
 import Eyebrow from "@/components/Eyebrow";
-import { Red } from "@/components/Brand";
+import { Red, RedPill } from "@/components/Brand";
 import { REPORT_TYPES } from "@/lib/products";
 
 type Stage = "idle" | "locating" | "located" | "sent";
@@ -32,7 +32,7 @@ export default function SignalerPage() {
       </h1>
       <p className="on-bg-soft" style={{ fontSize: 16, color: "var(--muted)", maxWidth: "42em", marginBottom: 20 }}>
         Voici comment fonctionnera Ratalerte pour les abonnés : une alerte géolocalisée envoyée en un seul geste,
-        transmise à l’équipe <Red>Ratel</Red> et à vos contacts de confiance.
+        transmise à l’équipe <RedPill>Ratel</RedPill> et à vos contacts de confiance.
       </p>
 
       {/* This page is a walkthrough, not a working alert. No geolocation is read and no
@@ -337,7 +337,7 @@ export default function SignalerPage() {
         className="on-bg-soft"
         style={{ fontSize: 13, lineHeight: 1.6, color: "var(--muted)", marginTop: 22, maxWidth: "46em" }}
       >
-        <Red>Ratel</Red> ne remplace pas les services publics de secours. En cas d’incendie, les sapeurs-pompiers
+        <RedPill>Ratel</RedPill> ne remplace pas les services publics de secours. En cas d’incendie, les sapeurs-pompiers
         sont systématiquement prévenus. La première intervention assurée par nos équipes est un service
         complémentaire, réservé aux abonnés Ratalerte.
       </p>

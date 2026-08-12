@@ -57,12 +57,45 @@ export default function PaiementPage() {
             enregistrée. Contactez-nous pour finaliser votre achat, nous vous rappelons pour la livraison et le
             paiement mobile money.
           </p>
+          {/* Was "Suivre ma livraison", which contradicted the paragraph above it:
+              no order was recorded, so there is nothing to track. /suivi is an
+              example, and it is offered as one. */}
           <Link
-            href="/suivi"
+            href="/boutique"
             className="btn-accent"
             style={{ display: "inline-block", padding: "15px 26px", fontSize: 15.5, textDecoration: "none" }}
           >
-            Suivre ma livraison →
+            Retour à la boutique →
+          </Link>
+          <p style={{ marginTop: 16, fontSize: 13.5 }}>
+            <Link href="/suivi" className="link-blue">
+              Voir un exemple de suivi de livraison
+            </Link>
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  /* Reachable without going through /panier: pay, follow the tracking link, then
+     press Back. Without this the page renders an address form, an operator picker
+     and a "Payer 0 FC" button, which reads as broken. */
+  if (items.length === 0) {
+    return (
+      <main style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px 80px" }}>
+        <div className="card" style={{ maxWidth: 560, margin: "40px auto", textAlign: "center", padding: "52px 32px" }}>
+          <h1 className="display" style={{ fontSize: 26, color: "var(--ink)", marginBottom: 10 }}>
+            Votre panier est vide
+          </h1>
+          <p style={{ fontSize: 15.5, color: "var(--muted)", lineHeight: 1.6, marginBottom: 26 }}>
+            Ajoutez un produit à votre panier pour passer commande.
+          </p>
+          <Link
+            href="/boutique"
+            className="btn-accent"
+            style={{ display: "inline-block", padding: "14px 26px", fontSize: 15.5, textDecoration: "none" }}
+          >
+            Voir la boutique →
           </Link>
         </div>
       </main>
@@ -96,7 +129,7 @@ export default function PaiementPage() {
             <h3 className="display" style={{ textTransform: "uppercase", fontSize: 16, color: "var(--ink)", marginBottom: 18 }}>
               1 · Livraison
             </h3>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 14 }}>
               <label className="lbl">
                 Prénom
                 <input className="fld" placeholder="Votre prénom" />
@@ -134,7 +167,9 @@ export default function PaiementPage() {
               2 · Moyen de paiement
             </h3>
             <p style={{ fontSize: 13.5, color: "var(--muted)", lineHeight: 1.5, marginBottom: 16 }}>
-              Choisissez votre opérateur. Vous recevrez une demande de confirmation sur votre téléphone.
+              {/* No collection request is sent yet, so the page must not say one is coming. */}
+              Choisissez votre opérateur. Le paiement se fera par transfert mobile money au moment de la livraison,
+              devant le livreur.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))", gap: 10, marginBottom: 16 }}>
               {MOBILE_MONEY.map((m) => {
