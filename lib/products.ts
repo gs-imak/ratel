@@ -132,10 +132,12 @@ export type Sector = { id: string; label: string; icon: string; desc: string };
 export const SECTORS: Sector[] = [
   { id: "entreprise", label: "Entreprise", icon: "🏭", desc: "Bureaux, ateliers et entrepôts : équipement complet, signalétique et plan d’évacuation adaptés à votre activité." },
   { id: "aeroport", label: "Aéroport", icon: "✈️", desc: "Zones à forte affluence et risques électriques : extincteurs CO₂, signalétique et couverture ERP conformes." },
-  { id: "hopitaux", label: "Hôpitaux", icon: "🏥", desc: "Établissements de santé : équipements adaptés aux locaux sensibles et aux circulations d’évacuation." },
+  /* Labels stay singular to match the rest of the list. The ids are what /devis
+     and the SECTORS lookup key on, so they must not change. */
+  { id: "hopitaux", label: "Hôpital", icon: "🏥", desc: "Établissements de santé : équipements adaptés aux locaux sensibles et aux circulations d’évacuation." },
   { id: "station-service", label: "Station-service", icon: "⛽", desc: "Liquides inflammables : extincteurs poudre et mousse, contrôle réglementaire périodique." },
   { id: "salle-festivites", label: "Salle de festivités", icon: "🎉", desc: "Public nombreux : extincteurs accessibles, couverture ERP et plan d’évacuation." },
-  { id: "scolaire", label: "Établissements scolaires", icon: "🏫", desc: "Écoles et collèges : sécurité des élèves, détecteurs et extincteurs vérifiés." },
+  { id: "scolaire", label: "Établissement scolaire", icon: "🏫", desc: "Écoles et collèges : sécurité des élèves, détecteurs et extincteurs vérifiés." },
   { id: "universite", label: "Université", icon: "🎓", desc: "Campus, amphis et laboratoires : protection adaptée aux locaux à risque." },
   { id: "batiment", label: "Bâtiment", icon: "🏢", desc: "Immeubles et copropriétés : équipement des parties communes et maintenance." },
 ];

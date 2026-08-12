@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import Eyebrow from "@/components/Eyebrow";
 import { PRODUCTS, CATEGORIES } from "@/lib/products";
+
+export const metadata: Metadata = {
+  title: "Boutique",
+  description:
+    "Extincteurs, détecteurs de fumée et couvertures anti-feu certifiés, livrés à Kinshasa. Choisissez selon votre risque : maison, voiture, cuisine ou entreprise.",
+};
 
 /* Server component on purpose. An earlier version read the category with
    useSearchParams, which forced a Suspense boundary around the whole page and
