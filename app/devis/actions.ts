@@ -1,11 +1,12 @@
 "use server";
 
 import { sendLead, type Lead, type LeadKind } from "@/lib/notify";
+import { serverClient } from "@/lib/supabase-server";
 import { FORMATION_TYPES, SECTORS } from "@/lib/products";
 
 export type SubmitState =
   | { status: "idle" }
-  | { status: "ok"; delivered: boolean }
+  | { status: "ok"; recorded: boolean; emailed: boolean }
   | { status: "error"; message: string };
 
 function text(form: FormData, key: string): string {
@@ -52,14 +53,32 @@ export async function submitLead(_prev: SubmitState, form: FormData): Promise<Su
     besoin: text(form, "besoin") || undefined,
   };
 
-  const { sent, reason } = await sendLead(lead);
-
-  if (!sent) {
-    /* The submission is still acknowledged, but the confirmation screen must not
-       claim a message reached anyone. The reason is logged for the developer, never
-       shown to the customer. */
-    console.warn(`[lead] non délivré (${reason})`, { kind, nom });
+  /* Persisting comes first and matters most. An email can bounce, a key can expire,
+     an inbox can be missed; a row in the database means the request is never lost and
+     Ratel can work the backlog from the back-office. The notification is a
+     convenience layered on top, not the system of record. */
+  let recorded = false;
+  const db = serverClient();
+  if (db) {
+    const { error } = await db.from("leads").insert({
+      kind,
+      name: lead.nom,
+      phone: lead.telephone,
+      email: lead.email ?? null,
+      sector: lead.secteur ?? null,
+      address_line: lead.adresse ?? null,
+      training_type: lead.typeFormation ?? null,
+      preferred_date: lead.dateSouhaitee || null,
+      message: lead.besoin ?? null,
+    });
+    if (error) console.error("[lead] enregistrement échoué", error.message);
+    else recorded = true;
   }
 
-  return { status: "ok", delivered: sent };
+  const { sent, reason } = await sendLead(lead);
+  if (!sent) console.warn(`[lead] mail non envoyé (${reason})`, { kind, nom });
+
+  /* Only a total failure of both paths is worth telling the customer about: it is the
+     one case where writing again, or calling, is genuinely necessary. */
+  return { status: "ok", recorded, emailed: sent };
 }

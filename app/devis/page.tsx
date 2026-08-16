@@ -70,17 +70,17 @@ export default function DevisPage() {
               </>
             )}
           </p>
-          {/* The confirmation only claims delivery when the email actually went out.
-              Without a configured mail key the request reached nobody, and saying so
-              is the difference between a lost lead and a customer who calls back. */}
-          {state.status === "ok" && !state.delivered ? (
+          {/* The confirmation states only what actually happened. A request that
+              reached neither the database nor an inbox must say so, because that is
+              the one case where the customer needs to act again. */}
+          {state.status === "ok" && !state.recorded && !state.emailed ? (
             <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28, maxWidth: "34em", marginInline: "auto" }}>
-              L’envoi automatique n’est pas encore activé sur le site. Si vous n’avez pas de retour rapidement,
-              contactez-nous directement, votre demande sera traitée en priorité.
+              Nous n’avons pas pu enregistrer votre demande automatiquement. Contactez-nous directement pour
+              qu’elle soit traitée sans délai.
             </p>
           ) : (
             <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28 }}>
-              Votre demande vient de nous être transmise.
+              Votre demande est bien enregistrée.
             </p>
           )}
           <Link
