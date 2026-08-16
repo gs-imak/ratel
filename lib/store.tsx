@@ -57,7 +57,12 @@ export function Providers({ children }: { children: ReactNode }) {
          saved cart honest. */
       const pruned: CartState = {};
       for (const [id, qty] of Object.entries(parsed)) {
-        if (typeof qty === "number" && qty > 0 && productById(id)) pruned[id] = qty;
+        const p = productById(id);
+        if (!p || typeof qty !== "number" || qty <= 0) continue;
+        /* Clamp to current availability: a product can sell out while a cart sits in
+           storage, and a basket must never restore more units than exist. */
+        const clamped = Math.min(p.stock, qty);
+        if (clamped > 0) pruned[id] = clamped;
       }
       setCart(pruned);
     } catch {
@@ -69,11 +74,21 @@ export function Providers({ children }: { children: ReactNode }) {
     localStorage.setItem("ratel.cart", JSON.stringify(cart));
   }, [cart]);
 
-  const add = (id: string) => setCart((c) => ({ ...c, [id]: (c[id] || 0) + 1 }));
+  /* Availability is enforced here, not only in the buttons. The UI disables ordering
+     an out-of-stock product, but a saved cart or an old link must not be able to
+     smuggle one through, and quantity can never exceed what is actually available. */
+  const add = (id: string) =>
+    setCart((c) => {
+      const p = productById(id);
+      if (!p || !p.inStock) return c;
+      return { ...c, [id]: Math.min(p.stock, (c[id] || 0) + 1) };
+    });
 
   const changeQty = (id: string, delta: number) =>
     setCart((c) => {
-      const q = Math.max(0, (c[id] || 0) + delta);
+      const p = productById(id);
+      if (!p) return c;
+      const q = Math.min(p.stock, Math.max(0, (c[id] || 0) + delta));
       const next = { ...c };
       if (q === 0) delete next[id];
       else next[id] = q;

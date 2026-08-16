@@ -12,7 +12,42 @@ export type Product = {
   kind: "extincteur" | "couverture" | "detecteur";
   img: string;
   gallery?: string[];
+  /** Units available. 0 means out of stock: the card greys out and ordering is blocked. */
+  stock: number;
+  /** ISO date the product is expected back, shown to the customer while out of stock. */
+  restockAt?: string;
+  inStock: boolean;
+  /** "de retour le 15 septembre", or undefined when no date is known. */
+  restockLabel?: string;
 };
+
+/** Stock per product. Until the catalogue moves to the database this is the single
+    place to edit; afterwards the same two fields come from `products.stock` and
+    `products.restock_at`, so nothing downstream changes. */
+const PRODUCT_STOCK: Record<string, { stock: number; restockAt?: string }> = {
+  p1: { stock: 24 },
+  p2: { stock: 12 },
+  p3: { stock: 6 },
+  p4: { stock: 9 },
+  p5: { stock: 4 },
+  p6: { stock: 0, restockAt: "2026-09-15" },
+  p7: { stock: 31 },
+  p8: { stock: 0 },
+  p9: { stock: 18 },
+};
+
+const MONTHS_FR = [
+  "janvier", "février", "mars", "avril", "mai", "juin",
+  "juillet", "août", "septembre", "octobre", "novembre", "décembre",
+];
+
+/** Formatted by hand so the server and the browser always produce the same string. */
+function restockLabelFrom(iso?: string): string | undefined {
+  if (!iso) return undefined;
+  const [y, m, d] = iso.split("-").map(Number);
+  if (!y || !m || !d) return undefined;
+  return `de retour le ${d} ${MONTHS_FR[m - 1]}`;
+}
 
 /* Interim product photos (public/images) — replace files in place with the
    client's own photos, keeping the same filenames. See public/images/CREDITS.md. */
@@ -70,7 +105,10 @@ export function fmt(n: number): string {
    These figures were carried over from the original design and restated in
    round francs so the site is legal to publish in the meantime — they are not
    quotes. Replace the `price` values here and the whole site follows. */
-const RAW: Omit<Product, "priceLabel" | "kind" | "img">[] = [
+const RAW: Omit<
+  Product,
+  "priceLabel" | "kind" | "img" | "stock" | "restockAt" | "inStock" | "restockLabel"
+>[] = [
   { id: "p1", name: "Extincteur Poudre ABC 1 kg", type: "Poudre ABC", classes: "A B C", cap: "1 kg", price: 62000, cat: "voiture", tag: "Voiture & 2 roues", blurb: "Compact, idéal pour la boîte à gants ou le coffre. Polyvalent : feux de solides, de liquides et de gaz." },
   { id: "p2", name: "Extincteur Poudre ABC 6 kg", type: "Poudre ABC", classes: "A B C", cap: "6 kg", price: 125000, cat: "maison", tag: "Maison & garage", blurb: "La référence polyvalente pour la maison. Couvre la grande majorité des départs de feu domestiques." },
   { id: "p3", name: "Extincteur CO₂ 2 kg", type: "CO₂", classes: "B", cap: "2 kg", price: 160000, cat: "cuisine", tag: "Électrique & cuisine", blurb: "N’endommage pas les appareils. Parfait pour les tableaux électriques et les équipements sous tension." },
@@ -86,13 +124,20 @@ function kindOf(p: { id: string }): Product["kind"] {
   return p.id === "p6" ? "couverture" : p.id === "p7" ? "detecteur" : "extincteur";
 }
 
-export const PRODUCTS: Product[] = RAW.map((p) => ({
-  ...p,
-  priceLabel: fmt(p.price),
-  kind: kindOf(p),
-  img: PRODUCT_IMG[p.id],
-  gallery: PRODUCT_GALLERY[p.id],
-}));
+export const PRODUCTS: Product[] = RAW.map((p) => {
+  const { stock, restockAt } = PRODUCT_STOCK[p.id] ?? { stock: 0 };
+  return {
+    ...p,
+    priceLabel: fmt(p.price),
+    kind: kindOf(p),
+    img: PRODUCT_IMG[p.id],
+    gallery: PRODUCT_GALLERY[p.id],
+    stock,
+    restockAt,
+    inStock: stock > 0,
+    restockLabel: stock > 0 ? undefined : restockLabelFrom(restockAt),
+  };
+});
 
 export const FEATURED_IDS = ["p9", "p2", "p3"];
 export const featured = PRODUCTS.filter((p) => FEATURED_IDS.includes(p.id));

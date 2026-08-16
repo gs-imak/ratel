@@ -161,13 +161,36 @@ export default function ProductPage() {
               {sel.priceLabel}
             </span>
             <button
-              className="btn-accent"
+              className={sel.inStock ? "btn-accent" : undefined}
               onClick={() => add(sel.id)}
-              style={{ flex: 1, minWidth: 180, padding: "16px 24px", fontSize: 16 }}
+              disabled={!sel.inStock}
+              style={{
+                flex: 1,
+                minWidth: 180,
+                padding: "16px 24px",
+                fontSize: 16,
+                ...(sel.inStock
+                  ? {}
+                  : {
+                      background: "var(--bg)",
+                      color: "var(--muted)",
+                      border: "1px solid var(--line)",
+                      borderRadius: "var(--radius)",
+                      fontWeight: 700,
+                      cursor: "not-allowed",
+                    }),
+              }}
             >
-              Ajouter au panier
+              {sel.inStock ? "Ajouter au panier" : "En rupture de stock"}
             </button>
           </div>
+          {!sel.inStock && (
+            <p style={{ marginTop: 12, fontSize: 14, color: "var(--muted)", lineHeight: 1.6 }}>
+              Ce produit est momentanément indisponible
+              {sel.restockLabel ? `, ${sel.restockLabel}` : ""}. Contactez-nous pour être prévenu de son
+              retour.
+            </p>
+          )}
           <div className="on-bg-soft" style={{ display: "flex", gap: 22, marginTop: 18, flexWrap: "wrap", fontSize: 13.5, color: "var(--muted)" }}>
             <span>🚚 Livraison 24-48h</span>
             <span>🛡️ Garantie 6 mois</span>

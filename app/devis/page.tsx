@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import { Red } from "@/components/Brand";
 import { FORMATION_TYPES, SECTORS } from "@/lib/products";
+import { submitLead, type SubmitState } from "./actions";
 
 export default function DevisPage() {
   const [secteur, setSecteur] = useState("");
@@ -12,7 +13,12 @@ export default function DevisPage() {
   const [adresse, setAdresse] = useState("");
   const [genre, setGenre] = useState("");
   const [dateSouhaitee, setDateSouhaitee] = useState("");
-  const [sent, setSent] = useState(false);
+  /* The form posts to a server action that emails Ratel. `pending` drives the
+     button so a slow connection cannot produce a double submission. */
+  const [state, formAction, pending] = useActionState<SubmitState, FormData>(submitLead, {
+    status: "idle",
+  });
+  const sent = state.status === "ok";
   /* Booking a training session goes through this same form — the client asked
      that it be reached "exactement comme pour demander un devis". */
   const [isFormation, setIsFormation] = useState(false);
@@ -64,12 +70,19 @@ export default function DevisPage() {
               </>
             )}
           </p>
-          {/* No invented reference number. Nothing is stored yet, so a reference would be
-              a number the customer could quote back at someone who has never seen it. */}
-          <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28, maxWidth: "34em", marginInline: "auto" }}>
-            L’envoi automatique des demandes n’est pas encore activé. Si vous n’avez pas de retour rapidement,
-            contactez-nous directement, votre demande sera traitée en priorité.
-          </p>
+          {/* The confirmation only claims delivery when the email actually went out.
+              Without a configured mail key the request reached nobody, and saying so
+              is the difference between a lost lead and a customer who calls back. */}
+          {state.status === "ok" && !state.delivered ? (
+            <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28, maxWidth: "34em", marginInline: "auto" }}>
+              L’envoi automatique n’est pas encore activé sur le site. Si vous n’avez pas de retour rapidement,
+              contactez-nous directement, votre demande sera traitée en priorité.
+            </p>
+          ) : (
+            <p style={{ fontSize: 14, color: "var(--muted)", lineHeight: 1.6, marginBottom: 28 }}>
+              Votre demande vient de nous être transmise.
+            </p>
+          )}
           <Link
             href="/"
             className="btn-accent"
@@ -114,34 +127,34 @@ export default function DevisPage() {
       </p>
 
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSent(true);
-        }}
+        action={formAction}
         className="card"
         style={{ padding: 28, display: "flex", flexDirection: "column", gap: 18 }}
       >
+        {/* Carries the quote-vs-training distinction to the server, which cannot read
+            the query string the client component parsed. */}
+        <input type="hidden" name="objet" value={isFormation ? "formation" : "devis"} />
         {/* auto-fit rather than a hard two-column grid: at 390px the fixed version
             gave 119px fields that could not show a phone number. */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 16 }}>
           <label className="lbl">
             Nom / Société
-            <input className="fld" required placeholder="Votre nom ou société" />
+            <input className="fld" name="nom" required placeholder="Votre nom ou société" />
           </label>
           {/* Phone is the required field, not email. Every follow-up the site promises
               is a callback, and in Kinshasa a WhatsApp number reaches a prospect far
               more reliably than an email address. */}
           <label className="lbl">
             Téléphone (WhatsApp de préférence)
-            <input className="fld" type="tel" required placeholder="0999 000 000" />
+            <input className="fld" name="telephone" type="tel" required placeholder="0999 000 000" />
           </label>
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
             Email (facultatif)
-            <input className="fld" type="email" placeholder="vous@exemple.cd" />
+            <input className="fld" name="email" type="email" placeholder="vous@exemple.cd" />
           </label>
           <label className="lbl" style={{ gridColumn: "1 / -1" }}>
             Secteur
-            <select className="fld" value={secteur} onChange={(e) => setSecteur(e.target.value)}>
+            <select className="fld" name="secteur" value={secteur} onChange={(e) => setSecteur(e.target.value)}>
               <option value="">— Sélectionnez votre secteur —</option>
               {SECTORS.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -157,6 +170,7 @@ export default function DevisPage() {
                 Adresse complète
                 <input
                   className="fld"
+                  name="adresse"
                   required
                   value={adresse}
                   onChange={(e) => setAdresse(e.target.value)}
@@ -165,7 +179,7 @@ export default function DevisPage() {
               </label>
               <label className="lbl">
                 Genre de formation souhaité
-                <select className="fld" value={genre} onChange={(e) => setGenre(e.target.value)}>
+                <select className="fld" name="typeFormation" value={genre} onChange={(e) => setGenre(e.target.value)}>
                   <option value="">— Sélectionnez —</option>
                   {FORMATION_TYPES.map((t) => (
                     <option key={t.id} value={t.id}>
@@ -178,6 +192,7 @@ export default function DevisPage() {
                 Date souhaitée
                 <input
                   className="fld"
+                  name="dateSouhaitee"
                   type="date"
                   value={dateSouhaitee}
                   onChange={(e) => setDateSouhaitee(e.target.value)}
@@ -189,6 +204,7 @@ export default function DevisPage() {
             Votre besoin
             <textarea
               className="fld"
+              name="besoin"
               rows={4}
               value={besoin}
               onChange={(e) => setBesoin(e.target.value)}
@@ -202,8 +218,22 @@ export default function DevisPage() {
           </label>
         </div>
 
-        <button className="btn-accent" type="submit" style={{ padding: "16px 24px", fontSize: 16.5 }}>
-          {isFormation ? "Réserver ma session de formation" : "Oui — je souhaite un devis"}
+        {state.status === "error" && (
+          <p role="alert" style={{ fontSize: 14, color: "var(--accent)", fontWeight: 600 }}>
+            {state.message}
+          </p>
+        )}
+        <button
+          className="btn-accent"
+          type="submit"
+          disabled={pending}
+          style={{ padding: "16px 24px", fontSize: 16.5, opacity: pending ? 0.7 : 1 }}
+        >
+          {pending
+            ? "Envoi en cours…"
+            : isFormation
+              ? "Réserver ma session de formation"
+              : "Oui, je souhaite un devis"}
         </button>
         <p style={{ fontSize: 12.5, color: "var(--muted)", textAlign: "center" }}>
           🔒 Vos informations restent confidentielles. Aucun engagement.

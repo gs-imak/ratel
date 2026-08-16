@@ -37,8 +37,38 @@ export default function ProductCard({
             fill
             sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 300px"
             className="pimg"
-            style={{ objectFit: "cover" }}
+            style={{
+              objectFit: "cover",
+              /* Greyed out when out of stock, per the client's brief. */
+              filter: product.inStock ? undefined : "grayscale(1)",
+              opacity: product.inStock ? 1 : 0.55,
+            }}
           />
+          {!product.inStock && (
+            <span
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(22,17,13,.88)",
+                color: "#fff",
+                textAlign: "center",
+                padding: "8px 10px",
+                fontSize: 12,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+              }}
+            >
+              En rupture de stock
+              {product.restockLabel ? (
+                <span style={{ display: "block", fontWeight: 500, textTransform: "none", letterSpacing: 0, fontSize: 11.5, color: "var(--hi)" }}>
+                  {product.restockLabel}
+                </span>
+              ) : null}
+            </span>
+          )}
         </div>
       </Link>
       <div style={{ padding: 18, display: "flex", flexDirection: "column", gap: 9, flex: 1 }}>
@@ -91,12 +121,30 @@ export default function ProductCard({
               reader listing the page's controls, so the accessible name carries the
               product while the visible label stays short. */}
           <button
-            className="btn-accent"
+            className={product.inStock ? "btn-accent" : undefined}
             onClick={() => add(product.id)}
-            aria-label={`Ajouter ${product.name} au panier`}
-            style={{ padding: "10px 16px", fontSize: 13.5 }}
+            disabled={!product.inStock}
+            aria-label={
+              product.inStock
+                ? `Ajouter ${product.name} au panier`
+                : `${product.name} est en rupture de stock`
+            }
+            style={{
+              padding: "10px 16px",
+              fontSize: 13.5,
+              ...(product.inStock
+                ? {}
+                : {
+                    background: "var(--bg)",
+                    color: "var(--muted)",
+                    border: "1px solid var(--line)",
+                    borderRadius: "var(--radius)",
+                    fontWeight: 600,
+                    cursor: "not-allowed",
+                  }),
+            }}
           >
-            Ajouter
+            {product.inStock ? "Ajouter" : "Indisponible"}
           </button>
         </div>
       </div>
