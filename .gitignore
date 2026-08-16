@@ -48,3 +48,7 @@ next-env.d.ts
 
 # local agent state
 .claude/.router-state/
+.env*
+
+# Supabase CLI scratch (contains the linked project ref)
+supabase/.temp/
