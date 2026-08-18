@@ -9,6 +9,15 @@ export default function ServiceWorker() {
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
 
+    /* Production only. The worker caches /_next/static/ cache-first, which is safe
+       against `next build` because those filenames carry a content hash. Turbopack's
+       dev server reuses stable chunk names instead and rewrites them in place, so in
+       development the worker pins the first build it ever saw and every later CSS or
+       JS change becomes invisible until the registration is manually cleared. That
+       silently invalidates any local verification, which is worse than having no
+       offline screen while developing. */
+    if (process.env.NODE_ENV !== "production") return;
+
     const register = () => {
       navigator.serviceWorker.register("/sw.js").catch(() => {
         /* An unavailable service worker must never break the page: the site works

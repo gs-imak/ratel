@@ -28,7 +28,7 @@ export default function HomePage() {
             <Eyebrow style={{ marginBottom: 22 }}>Prévention Sécurité Incendie</Eyebrow>
             <h1
               className="display"
-              style={{ fontWeight: 700, fontSize: "clamp(44px,6vw,76px)", lineHeight: 0.98, marginBottom: 24 }}
+              style={{ fontWeight: 700, fontSize: "clamp(44px,6vw,76px)", marginBottom: 24 }}
             >
               La vie n’a pas de prix.
             </h1>
@@ -336,7 +336,7 @@ export default function HomePage() {
             </Eyebrow>
             <h2
               className="display"
-              style={{ fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", lineHeight: 1.02, marginBottom: 18 }}
+              style={{ fontWeight: 700, fontSize: "clamp(30px,4vw,48px)", marginBottom: 18 }}
             >
               Un départ de feu ?
               <br />

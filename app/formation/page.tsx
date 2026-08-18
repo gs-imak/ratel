@@ -26,7 +26,7 @@ export default function FormationPage() {
         <Eyebrow>Formation incendie</Eyebrow>
         <h1
           className="display on-bg"
-          style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 14, lineHeight: 1.02 }}
+          style={{ fontSize: "clamp(34px,4.5vw,52px)", color: "var(--ink)", marginBottom: 14 }}
         >
           Vos équipes face à un vrai départ de feu
         </h1>
@@ -55,7 +55,6 @@ export default function FormationPage() {
                 fontSize: "clamp(24px,3.2vw,36px)",
                 color: "var(--ink)",
                 textTransform: "uppercase",
-                lineHeight: 1.05,
                 marginBottom: 14,
               }}
             >

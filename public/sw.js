@@ -42,7 +42,9 @@ self.addEventListener("fetch", (event) => {
   }
 
   /* Cache-first ONLY for build assets under /_next/static/, whose filenames carry a
-     content hash and therefore change whenever their contents change.
+     content hash and therefore change whenever their contents change. That holds for
+     `next build`, not for the Turbopack dev server, which reuses stable chunk names —
+     which is why the worker is only ever registered in production.
      Everything else goes to the network. In particular /images/ and the
      /_next/image URLs derived from them must NEVER be cached here: product photos
      are replaced in place under the same filename when the client supplies his

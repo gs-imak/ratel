@@ -62,6 +62,16 @@ a {
   font-weight: var(--display-weight);
   text-transform: var(--display-transform);
   letter-spacing: var(--display-spacing);
+  /* Display text renders uppercase, and French uppercase carries accents. Measured in
+     Oswald at the rendered weight: the tallest accented cap (À/É/Ê) has 1.07em of ink
+     above the baseline, and the deepest cap descender (Ç) has 0.27em below it — so two
+     consecutive lines touch at 1.34em and overlap below it. That is what put the É of
+     DÉPART inside the line above on /formation.
+
+     1.4 clears the worst French pair with room to spare while staying tighter than
+     Oswald's own default of 1.48. Headings inherit this: do not set a tighter
+     line-height inline on anything that can wrap or can contain an accent. */
+  line-height: 1.4;
 }
 
 /* Text sitting directly on the red/yellow page background → force light for

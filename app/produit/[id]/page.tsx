@@ -107,7 +107,7 @@ export default function ProductPage() {
           </span>
           <h1
             className="display on-bg"
-            style={{ fontSize: "clamp(30px,3.6vw,44px)", color: "var(--ink)", lineHeight: 1.05, marginBottom: 14 }}
+            style={{ fontSize: "clamp(30px,3.6vw,44px)", color: "var(--ink)", marginBottom: 14 }}
           >
             {sel.name}
           </h1>
